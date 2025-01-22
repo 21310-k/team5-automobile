@@ -1,0 +1,55 @@
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 16:23:36 PAGE   1
+
+************ SOURCE LISTING ************
+
+      Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
+FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\bios_sensor_input..c
+         1     /****************************************************************************************************************/
+         2     /*  FILE        : bios_sensor_input.c                                                                           */
+         3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
+         4     /*  DESCRIPTION :AGVのセンサ情報を獲得するモジュール                                                            */
+         5     /*  CPU TYPE    :H8/3052F                                                                                       */
+         6     /****************************************************************************************************************/
+         7     #include    "machine.h"                             /* 組込み関数の定義                                         */
+         8     #include    "reg3052.h"                             /* H8/3052Fの内蔵モジュール定義                             */
+         9     #include    "agvdef.h"                              /* 無人搬送車のデバイス定義                                 */
+        10     
+        11     /*****************************************************************************************************************
+        12         bios_sensor_input関数
+        13     *****************************************************************************************************************/
+        14     unsigned char bios_sensor_input(void)
+        15     {
+        16         return (~SENS_PORT);
+        17     }
+
+
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 16:23:36 PAGE   1
+
+******* SECTION SIZE INFORMATION *******
+
+PROGRAM  SECTION(P):                                0x0000000A Byte(s)
+CONSTANT SECTION(C):                                0x00000000 Byte(s)
+DATA     SECTION(D):                                0x00000000 Byte(s)
+BSS      SECTION(B):                                0x00000000 Byte(s)
+
+TOTAL PROGRAM  SECTION: 0x0000000A Byte(s)
+TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
+TOTAL DATA     SECTION: 0x00000000 Byte(s)
+TOTAL BSS      SECTION: 0x00000000 Byte(s)
+
+    TOTAL PROGRAM SIZE: 0x0000000A Byte(s)
+
+
+
+** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
+
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        0 
+NUMBER OF EXTERNAL DEFINITION SYMBOLS:        1 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          1 
+
+
+
+**** COMPILE CONDITION INFORMATION ****
+
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_sensor_input.obj -debug -list=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_sensor_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\bios_sensor_input..c -lang=c -nologo
+CPU         : 300ha:20

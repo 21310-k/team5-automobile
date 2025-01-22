@@ -1,0 +1,21 @@
+[HIMDBVersion]
+2.0
+[DATABASE_VERSION]
+"1.2" 
+[CURRENT_PROJECT]
+"Soft2" 
+[GENERAL_DATA]
+[BREAKPOINTS]
+[OPEN_WORKSPACE_FILES]
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\agvvars.h" 
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\bios_step_output.c" 
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\itask_motor.c" 
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\main.c" 
+[WORKSPACE_FILE_STATES]
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\agvvars.h" -8 -31 1078 469 1 3 
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\bios_step_output.c" 52 52 928 296 0 2 
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\itask_motor.c" 26 26 928 296 0 1 
+"C:\Users\s4exp\Downloads\soft2\soft2\Soft2\main.c" 0 0 928 296 0 0 
+[LOADED_PROJECTS]
+"Soft2" 
+[END]

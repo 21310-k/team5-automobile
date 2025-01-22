@@ -1,0 +1,9 @@
+-cpu=300HA:20
+-object="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_ad_input.obj"
+-debug
+-list="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_ad_input.lst"
+-show=tab=4
+-chgincpath
+"C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\bios_ad_input.c"
+-lang=c
+-nologo

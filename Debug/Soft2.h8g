@@ -1,0 +1,3 @@
+-cpu=300HA:20
+-output="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\Soft2.lib"
+-head=runtime,new,stdio,stdlib

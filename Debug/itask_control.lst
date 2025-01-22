@@ -1,0 +1,257 @@
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 19:07:10 PAGE   1
+
+************ SOURCE LISTING ************
+
+      Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
+FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\itask_control.c
+         1     /****************************************************************************************************************/
+         2     /*  FILE        : itask_control.c                                                                               */
+         3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
+         4     /*  DESCRIPTION :AGVの動作状態管理割り込みタスク                                                                */
+         5     /*  CPU TYPE    :H8/3052F                                                                                       */
+         6     /****************************************************************************************************************/
+         7     #include    "machine.h"                                 /* 組込み関数の定義                                     */
+         8     #include    "reg3052.h"                                 /* H8/3052Fの内蔵モジュール定義                         */
+         9     #include    "agvdef.h"                                  /* 無人搬送車のデバイス定義                             */
+        10     #include    "agvvars.h"                                 /* 無人搬送車の共通変数を定義                           */
+        11     #include    "def_monitor_printf.h"                      /* 組込みprintfの定義                                   */
+        12     
+        13     /****************************************************************************************************************/
+        14     /*  搬送車動作状態監視・ハンドル制御タスク itask_control                                                        */
+        15     /****************************************************************************************************************/
+        16     int agv_state(void);
+        17     unsigned char cal_sensor_position(void);
+        18     void handle_control(unsigned char sens_position);
+        19     
+        20     #pragma interrupt itask_control
+        21     void    itask_control(void)
+        22     {
+        23         unsigned char sensor_position;
+        24         agv_state();
+        25     
+        26         switch(AGV_STATE){
+        27             
+        28             case AGV_BOOT:{
+        29                 if((A & 0x03) == 0x01){
+        30                     AGV_STATE = AGV_READY;
+        31                 }
+        32                 break;
+        33             }
+        34             
+        35             case AGV_READY:{
+        36                 if(((A & 0x82) == 0x02) && (bios_sensor_input() != 0)){
+        37                     AGV_STATE = AGV_RUN_WAIT;
+        38                     MOTOR_STATE = MOTOR_ACC;
+        39                     TSTR|=0x02;
+        40                 }
+        41                 else{
+        42                     AGV_STATE=AGV_READY;
+        43                 }
+        44                 break;
+        45             }
+        46             
+        47             case AGV_RUN_WAIT:{
+        48                 if(MOTOR_STATE != MOTOR_STOP){
+        49                     AGV_STATE = AGV_RUN;
+        50                 }
+        51                 break;
+        52             }
+        53             
+        54             case AGV_RUN:{
+        55                 if(SENS_ERROR == 0x01) {
+        56                     AGV_STATE = AGV_RUN_ALM;
+        57                     MOTOR_STATE = MOTOR_BREAK;
+        58                 }
+        59                 if((A & 0x02) == 0x00){
+        60                     AGV_STATE = AGV_STOP_WAIT;
+        61                     MOTOR_STATE = MOTOR_BREAK;
+        62                 }
+        63                 sensor_position = cal_sensor_position();
+        64                 handle_control(sensor_position);
+        65                 break;
+        66             }
+        67             
+        68             case AGV_RUN_ALM:{
+        69                 if(((A & 0x02) == 0x00)&&(MOTOR_STATE==MOTOR_STOP)){
+        70                     AGV_STATE = AGV_READY;
+        71                     SENS_ERROR=0x00;
+        72                 }
+        73                 break;
+        74             }
+        75             
+        76             case AGV_STOP_WAIT:{
+        77                 if ((((A & 0x02) == 0x02)&&(MOTOR_STATE==MOTOR_BREAK))||(SENS_ERROR == 0x01)){
+        78                     AGV_STATE = AGV_RUN_ALM;
+        79                 }
+        80                 if(MOTOR_STATE == MOTOR_STOP){
+        81                     AGV_STATE = AGV_READY;
+        82                 }
+        83                 break;
+        84             }
+        85         }
+        86     
+        87     /*
+        88         // AGV_STATEがAGV_BOOTで、Aのbit0が1かつbit1が0の場合、AGV_STATEをAGV_READYに遷移
+        89         if (AGV_STATE == AGV_BOOT && (A & 0x01) && !(A & 0x02)) {
+        90             AGV_STATE = AGV_READY;
+        91         }
+        92         // AGV_STATEがAGV_READYで、Aのbit1が1、bit7が0、SENS_DATAが0x00でない場合、AGV_STATEをAGV_RUN_WAITに遷移
+        93         if (AGV_STATE == AGV_READY && (A & 0x02) && !(A & 0x80) && bios_sensor_input() != 0x00) {
+        94             AGV_STATE = AGV_RUN_WAIT;
+        95             MOTOR_STATE = MOTOR_ACC;
+        96             TSTR|=0x02;
+        97         }
+        98         // AGV_STATEがAGV_RUN_WAITで、MOTOR_STATEがMOTOR_STOPでない場合、AGV_STATEをAGV_RUNに遷移
+        99         if (AGV_STATE == AGV_RUN_WAIT && MOTOR_STATE != MOTOR_STOP) {
+       100             AGV_STATE = AGV_RUN;
+       101             cal_sensor_position();
+       102             handle_control(sensor_position);
+       103         }
+       104         // AGV_STATEがAGV_RUNで、Aのbit1が0の場合、AGV_STATEをAGV_STOP_WAITに遷移
+       105         if (AGV_STATE == AGV_RUN && !(A & 0x02)) {
+       106             AGV_STATE = AGV_STOP_WAIT;
+       107             MOTOR_STATE = MOTOR_BREAK;
+       108         }
+       109         // AGV_STATEがAGV_STOP_WAITで、Aのbit1が1か、SENS_ERRORが0x01の場合、AGV_STATEをAGV_RUN_ALMに遷移
+       110         if (((AGV_STATE == AGV_STOP_WAIT) && (A & 0x02)) ||( (AGV_STATE == AGV_STOP_WAIT) && (SENS_ERROR == 0x01))){
+       111             AGV_STATE = AGV_RUN_ALM;
+       112             MOTOR_STATE = MOTOR_BREAK;
+       113         }
+       114          // AGV_STATEがAGV_RUNで、SENS_ERRORが0x01の場合、AGV_STATEをAGV_RUN_ALMに遷移
+       115         if ((AGV_STATE == AGV_RUN) && (SENS_ERROR == 0x01)) {
+       116             AGV_STATE = AGV_RUN_ALM;
+       117             MOTOR_STATE = MOTOR_BREAK;
+       118         }
+       119         // AGV_STATEがAGV_RUN_ALMで、Aのbit1が0、MOTOR_STATEがMOTOR_STOPの場合、AGV_STATEをAGV_READYに遷移
+       120         if ((AGV_STATE == AGV_RUN_ALM) && !(A & 0x02) && (MOTOR_STATE == MOTOR_STOP)) {
+       121             AGV_STATE = AGV_READY;
+       122             SENS_ERROR=0x00;
+       123         }
+       124         // AGV_STATEがAGV_STOP_WAITで、MOTOR_STATEがMOTOR_STOPの場合、AGV_STATEをAGV_READYに遷移
+       125         if (AGV_STATE == AGV_STOP_WAIT && MOTOR_STATE == MOTOR_STOP) {
+       126             AGV_STATE = AGV_READY;
+       127         }
+       128     */  
+       129         TSR2&=~0x01;
+       130     }
+       131     /****************************************************************************************************************/
+       132     /*  AGVステート管理モジュール agv_state                                                                         */
+       133     /****************************************************************************************************************/
+       134     int agv_state(void)
+       135     {
+       136         A= 0x00;   // 初期値を0x00に設定
+       137         
+       138         // SW_DATAの0bit目が1の場合、Aの0bit目を1にする
+       139         // SW_DATAの0bit目が0の場合、Aの0bit目を0にする
+       140         if (SW_DATA & 0x01) {
+       141             A |= 0x01;   // Aの0bit目を1にする
+       142         }
+       143         else {
+       144             A &= ~0x01;  // Aの0bit目を0にする
+       145         }
+       146         // SW_DATAの1bit目が1の場合、Aの1bit目を1にする
+       147         // SW_DATAの1bit目が0の場合、Aの1bit目を0にする
+       148         if (SW_DATA & 0x02) {
+       149             A |= 0x02;   // Aの1bit目を1にする
+       150         }
+       151         else {
+       152             A &= ~0x02;  // Aの1bit目を0にする
+       153         }
+       154         if (MOTOR_STATE == MOTOR_ACC) {   // 加速状態
+       155             A |= 0x08;   // Aの3bit目を1にする
+       156         }
+       157         else if (MOTOR_STATE == MOTOR_CONST) {   // 定速状態
+       158             A &= ~0x08;  // Aの3bit目を0にする
+       159             A |= 0x10;   // Aの4bit目を1にする
+       160         }
+       161         else if (MOTOR_STATE == MOTOR_BREAK) {   // 減速状態
+       162             A &= ~0x08;  // Aの3bit目を0にする
+       163             A &= ~0x10;  // Aの4bit目を0にする
+       164             A |= 0x20;   // Aの5bit目を1にする
+       165         }
+       166         else if (MOTOR_STATE == MOTOR_STOP) {   // 停止状態
+       167             A &= ~0x20;  // Aの5bit目を0にする    
+       168         }
+       169         // AGV_STATEの値に応じてAのbit7を変更
+       170         if (AGV_STATE == AGV_RUN_ALM) {
+       171             A |= 0x80;   // Aのbit7を1にする
+       172         }
+       173         else if (AGV_STATE == AGV_READY) {
+       174             A &= ~0x80;  // Aのbit7を0にする
+       175         }
+       176     }
+       177     /****************************************************************************************************************/
+       178     /*  センサ位置計算モジュール cal_sensor_position                                                                */
+       179     /****************************************************************************************************************/
+       180     unsigned char cal_sensor_position(void)
+       181     {
+       182         int binary[8];                /* 各ビットの値を格納する配列 */
+       183         int weight[8];                /* 各ビットの重みを格納する配列 */
+       184         int sum_weighted_bits = 0;    /* Σ(weight(i) * bit(i)) */
+       185         int count = 0;                /* Σ(bit(i)) */
+       186         unsigned char position = 0;       /* 計算結果のPosition */
+       187         int i = 0;
+       188     
+       189         /* 2進数変換と weight(i) 計算 */
+       190         for (i = 0; i < 8; i++) {
+       191             binary[i] = (SENS_DATA >> i) & 1;     /* bit(i)の計算 */
+       192             weight[i] = 16 + 32 * i;              /* weight(i)の計算 */
+       193     
+       194             /* Σ(weight(i) * bit(i)) と Σ(bit(i)) の計算 */
+       195             sum_weighted_bits += weight[i] * binary[i];
+       196             count += binary[i];
+       197         }
+       198         /* Position計算 */
+       199             if (count != 0) {
+       200             position = sum_weighted_bits / count;
+       201         }
+       202         return (position);
+       203     }
+       204     /****************************************************************************************************************/
+       205     /*  ハンドル制御モジュール handle_control                                                                       */
+       206     /****************************************************************************************************************/
+       207     void handle_control(unsigned char sens_position)
+       208     {
+       209         unsigned char control = 0;
+       210         int d;                              /*ずれ量*/
+       211         int diff;                           /*計算値*/
+       212         unsigned char ad;                   /* 現在のハンドル切れ角 */
+       213         unsigned char correction;           /* 修正値 */
+       214         d = sens_position - SENS_CENTER;          /*ずれ量*/
+       215         ad = bios_ad_input();                     /* 現在のハンドル切れ角 */
+       216         diff = d * 17 / 32;
+       217         control = diff + ad;
+       218         bios_da_output(control);
+       219     }
+
+
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 19:07:10 PAGE   1
+
+******* SECTION SIZE INFORMATION *******
+
+PROGRAM  SECTION(P):                                0x00000204 Byte(s)
+CONSTANT SECTION(C):                                0x00000000 Byte(s)
+DATA     SECTION(D):                                0x00000000 Byte(s)
+BSS      SECTION(B):                                0x00000000 Byte(s)
+
+TOTAL PROGRAM  SECTION: 0x00000204 Byte(s)
+TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
+TOTAL DATA     SECTION: 0x00000000 Byte(s)
+TOTAL BSS      SECTION: 0x00000000 Byte(s)
+
+    TOTAL PROGRAM SIZE: 0x00000204 Byte(s)
+
+
+
+** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
+
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:       12 
+NUMBER OF EXTERNAL DEFINITION SYMBOLS:        4 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         45 
+
+
+
+**** COMPILE CONDITION INFORMATION ****
+
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_control.obj -debug -list=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_control.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\itask_control.c -lang=c -nologo
+CPU         : 300ha:20
