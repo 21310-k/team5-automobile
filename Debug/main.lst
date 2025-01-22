@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 17:52:56 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   22-Jan-2025 18:16:13 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\main.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\Soft2\main.c
          1     /****************************************************************************************************************/
          2     /*  FILE        :main.c                                                                                         */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -28,7 +28,7 @@ FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\main.c
         22     int count=0;
         23     
         24     void agv_init(void)
-        25     {
+        25     {/*
         26         LED_PORT = 0x00;
         27         DA_PORT=0x80;
         28         STEP_PORT=0x00;
@@ -37,34 +37,34 @@ FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\main.c
         31         SYSCR &= 0xf7;
         32     
         33         TCR0 = 0xa0;/* TCR0の設定                       */
-        34         TIOR0 = 0x8b;/* TIOR0の設定                     */
-        35         GRA0 = 624;/* GRA0の設定                        */
-        36     
-        37         TCR1 = 0xa6;/* TCR1の設定                       */
-        38         TIER1 = 0xf9;/* TIER1の設定                     */
-        39         GRA1=99;
+        34     //  TIOR0 = 0x8b;/* TIOR0の設定                     */
+        35     //  GRA0 = 624;/* GRA0の設定                        */
+        36     //
+        37     //  TCR1 = 0xa6;/* TCR1の設定                       */
+        38     //  TIER1 = 0xf9;/* TIER1の設定                     */
+        39     //  GRA1=99;
         40     
-        41         TCR2 = 0xa6;/* TCR2の設定                       */
-        42         TIER2 = 0xf9;/* TIER2の設定                     */
-        43         GRA2 = 999;
+        41     //  TCR2 = 0xa6;/* TCR2の設定                       */
+        42     //  TIER2 = 0xf9;/* TIER2の設定                     */
+        43     //  GRA2 = 999;
         44     
-        45         TCR3 = 0xa0;/* TCR3の設定                       */
-        46         TIER3 = 0xf9;/* TIER3の設定                     */
-        47         GRA3 = 12499;
+        45     //  TCR3 = 0xa0;/* TCR3の設定                       */
+        46     //  TIER3 = 0xf9;/* TIER3の設定                     */
+        47     //  GRA3 = 12499;
         48         
-        49         TCR4=0xa6;
-        50         TIER4=0xf9;
-        51         GRA4=9999;
+        49     //  TCR4=0xa6;
+        50     //  TIER4=0xf9;
+        51     //  GRA4=9999;
         52         
         53     
-        54         TSTR |= 0x0d;//ITU0/ITU2/ITU3 Start                 */
-        55         and_ccr(~0x80);/* ccrの割込み禁止フラグ(bit7)をクリア   */
-        56     
+        54     //  TSTR |= 0x0d;//ITU0/ITU2/ITU3 Start                 */
+        55     //  and_ccr(~0x80);/* ccrの割込み禁止フラグ(bit7)をクリア   */
+        56     //
         57     }
         58     
         59     void LED(void)//LEDを光らせる関数（現在の状態を知らせる）
         60     {
-        61         bios_led_output(A);
+        61     //  bios_led_output(A);
         62     }
         63     
         64     /****************************************************************************************************************/
@@ -72,66 +72,71 @@ FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\main.c
         66     /****************************************************************************************************************/
         67     int main(void)
         68     {   
-        69         int i;
-        70         int B;
-        71         agv_init();//関数の初期化
-        72     
-        73         for (i = 0;; i++)//出力をさせる
-        74         {
-        75             LED();
-        76             
-        77             // bios_led_output(AGV_STATE);      
-        78             
-        79             if ((A& 0x80) == 0x80)
-        80             {
-        81                 TSTR|=0x10;
-        82             }
-        83         }
-        84         return 0;
-        85     }
-        86     
-        87     
-        88     #pragma interrupt main_beep
-        89     void main_beep(void)
-        90     {
-        91         TSR4&=~0x01;
-        92         if(count==6)
-        93         {
-        94             count=0;
-        95             TSTR &=~0x10;
-        96             TCNT4=0;
-        97         }
-        98         else
-        99         {
-       100             count +=1;
-       101             
-       102             if(count%2==1)
-       103             {
-       104                 bios_beep_output(1);
-       105             }
-       106             else
-       107             {
-       108                 bios_beep_output(0);
-       109             }
-       110         }
-       111     }
+        69         unsigned int i=0;
+        70         while(-1){
+        71         for(i=0;i<=60000;i++){}
+        72         itask_input();
+        73         bios_led_output(SENS_DATA);
+        74     }
+        75     /*  int i;
+        76         int B;
+        77         agv_init();//関数の初期化
+        78     
+        79         for (i = 0;; i++)//出力をさせる
+        80         {
+        81             LED();
+        82             
+        83             // bios_led_output(AGV_STATE);      
+        84             
+        85             if ((A& 0x80) == 0x80)
+        86             {
+        87                 TSTR|=0x10;
+        88             }*/
+        89         return (0);
+        90     }
+        91     
+        92     
+        93     #pragma interrupt main_beep
+        94     void main_beep(void)
+        95     {
+        96         /*TSR4&=~0x01;
+        97         if(count==6)
+        98         {
+        99             count=0;
+       100             TSTR &=~0x10;
+       101             TCNT4=0;
+       102         }
+       103         else
+       104         {
+       105             count +=1;
+       106             
+       107             if(count%2==1)
+       108             {
+       109                 bios_beep_output(1);
+       110             }
+       111             else
+       112             {
+       113                 bios_beep_output(0);
+       114             }
+       115         }*/
+       116     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 17:52:56 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   22-Jan-2025 18:16:13 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x000000E6 Byte(s)
+PROGRAM  SECTION(P):                                0x00000022 Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
 DATA     SECTION(D):                                0x00000004 Byte(s)
 BSS      SECTION(B):                                0x00000004 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x000000E6 Byte(s)
+TOTAL PROGRAM  SECTION: 0x00000022 Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
 TOTAL DATA     SECTION: 0x00000004 Byte(s)
 TOTAL BSS      SECTION: 0x00000004 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x000000EE Byte(s)
+    TOTAL PROGRAM SIZE: 0x0000002A Byte(s)
 
 
 
@@ -139,11 +144,11 @@ TOTAL BSS      SECTION: 0x00000004 Byte(s)
 
 NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        2 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:       11 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         18 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         15 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.obj -debug -list=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\main.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\Soft2\main.c -lang=c -nologo
 CPU         : 300ha:20

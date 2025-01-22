@@ -1,33 +1,33 @@
-Optimizing Linkage Editor (V.9.04.01.000)         27-Nov-2024 19:07:10
+Optimizing Linkage Editor (V.9.04.01.000)         22-Jan-2025 18:16:13
 
 *** Options ***
 
--subcommand=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\Soft2.hlk
+-subcommand=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\Soft2.hlk
 -noprelink
 -rom=D=R
 -nomessage
--list="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\Soft2.map"
+-list="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\Soft2.map"
 -show=symbol,reference,xreference,total_size
 -nooptimize
 -start=P,C,C$DSEC,C$BSEC,D/080000,B,R/090000,DVectTable/0FE030,S/0FFE00
 -nologo
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_ad_input.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_beep_output.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_da_output.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_led_output.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_sensor_input.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_step_output.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_sw_input.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\dbsct.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_control.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_input.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_motor.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\sbrk.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\startup.obj"
--input="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\VectTable.obj"
--library="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\Soft2.lib"
--output="C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\Soft2.abs"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_ad_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_beep_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_da_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_led_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_sensor_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_step_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_sw_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\dbsct.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_control.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_motor.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\sbrk.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\startup.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\VectTable.obj"
+-library="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\Soft2.lib"
+-output="C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\Soft2.abs"
 -end
 
 *** Error information ***
@@ -37,19 +37,19 @@ Optimizing Linkage Editor (V.9.04.01.000)         27-Nov-2024 19:07:10
 SECTION                            START      END         SIZE   ALIGN
 
 P
-                                  00080000  00080677       678   2
+                                  00080000  000805b7       5b8   2
 C
-                                  00080678  00080999       322   2
+                                  000805b8  000808d9       322   2
 C$DSEC
-                                  0008099a  000809a5         c   2
+                                  000808da  000808e5         c   2
 C$BSEC
-                                  000809a6  000809ad         8   2
+                                  000808e6  000808ed         8   2
 D
-                                  000809ae  000809c3        16   2
+                                  000808ee  00080901        14   2
 B
-                                  00090000  00090425       426   2
+                                  00090000  00090429       42a   2
 R
-                                  00090426  0009043b        16   2
+                                  0009042a  0009043d        14   2
 DVectTable
                                   000fe030  000fe123        f4   2
 S
@@ -57,9 +57,9 @@ S
 
 *** Total Section Size ***
 
-RAMDATA SECTION:  0000053c Byte(s)
-ROMDATA SECTION:  00000440 Byte(s)
-PROGRAM SECTION:  00000678 Byte(s)
+RAMDATA SECTION:  0000053e Byte(s)
+ROMDATA SECTION:  0000043e Byte(s)
+PROGRAM SECTION:  000005b8 Byte(s)
 
 *** Symbol List ***
 
@@ -68,35 +68,35 @@ FILE=                               START        END    SIZE
   SYMBOL                            ADDR        SIZE    INFO      COUNTS  OPT
 
 SECTION=P
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_ad_input.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_ad_input.obj
                                   00080000  0008002b        2c
   _bios_ad_input
                                   00080000        2c   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_beep_output.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_beep_output.obj
                                   0008002c  00080047        1c
   _bios_beep_output
-                                  0008002c        1c   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_da_output.obj
+                                  0008002c        1c   func ,g         0
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_da_output.obj
                                   00080048  0008004f         8
   _bios_da_output
                                   00080048         8   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_led_output.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_led_output.obj
                                   00080050  00080057         8
   _bios_led_output
                                   00080050         8   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_sensor_input.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_sensor_input.obj
                                   00080058  00080061         a
   _bios_sensor_input
-                                  00080058         a   func ,g         3
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_step_output.obj
+                                  00080058         a   func ,g         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_step_output.obj
                                   00080062  000800af        4e
   _bios_step_output
                                   00080062        4e   func ,g         3
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_sw_input.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_sw_input.obj
                                   000800b0  000800b7         8
   _bios_sw_input
-                                  000800b0         8   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_control.obj
+                                  000800b0         8   func ,g         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_control.obj
                                   000800b8  000802bb       204
   _itask_control
                                   000800b8        de   func ,g         1
@@ -106,179 +106,181 @@ FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_c
                                   00080216        76   func ,g         1
   _handle_control
                                   0008028c        30   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_input.obj
-                                  000802bc  0008035f        a4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_input.obj
+                                  000802bc  00080363        a8
   _itask_input
-                                  000802bc        a4   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_motor.obj
-                                  00080360  0008040b        ac
+                                  000802bc        a8   func ,g         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_motor.obj
+                                  00080364  0008040f        ac
   _itask_motor
-                                  00080360        ac   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.obj
-                                  0008040c  000804f1        e6
+                                  00080364        ac   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj
+                                  00080410  00080431        22
   _agv_init
-                                  0008040c        70   func ,g         1
+                                  00080410         2   func ,g         0
   _LED
-                                  0008047c         c   func ,g         1
+                                  00080412         2   func ,g         0
   _main
-                                  00080488        12   func ,g         1
+                                  00080414        1c   func ,g         1
   _main_beep
-                                  0008049a        58   func ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\sbrk.obj
-                                  000804f2  00080523        32
+                                  00080430         2   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\sbrk.obj
+                                  00080432  00080463        32
   _sbrk
-                                  000804f2        32   func ,g         0
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\startup.obj
-                                  00080524  00080531         e
+                                  00080432        32   func ,g         0
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\startup.obj
+                                  00080464  00080471         e
   _PowerON_Reset
-                                  00080524         e   entry,g        39
+                                  00080464         e   entry,g        39
 FILE=mvn3
-                                  00080532  000805b1        80
+                                  00080472  000804f1        80
   $MVN$3
-                                  00080532         0   none ,g         1
+                                  00080472         0   none ,g         1
   
-                                  00080550         0   none ,l         0
+                                  00080490         0   none ,l         0
   
-                                  0008055c         0   none ,l         0
+                                  0008049c         0   none ,l         0
   
-                                  00080570         0   none ,l         0
+                                  000804b0         0   none ,l         0
+  
+                                  000804ba         0   none ,l         0
+  
+                                  000804be         0   none ,l         0
+  
+                                  000804cc         0   none ,l         0
+  
+                                  000804d2         0   none ,l         0
+  
+                                  000804d6         0   none ,l         0
+  
+                                  000804de         0   none ,l         0
+FILE=spregld3
+                                  000804f2  00080513        22
+  $sp_regld$3
+                                  000804f2         0   none ,g         2
+FILE=spregsv3
+                                  00080514  00080535        22
+  $sp_regsv$3
+                                  00080514         0   none ,g         6
+FILE=sprgld23
+                                  00080536  0008054b        16
+  $spregld2$3
+                                  00080536         0   none ,g         4
+FILE=_initsct
+                                  0008054c  000805b7        6c
+  __INITSCT
+                                  0008054c         0   none ,g         1
+  
+                                  0008056a         0   none ,l         0
+  
+                                  00080574         0   none ,l         0
+  
+                                  00080576         0   none ,l         0
   
                                   0008057a         0   none ,l         0
   
-                                  0008057e         0   none ,l         0
-  
                                   0008058c         0   none ,l         0
   
-                                  00080592         0   none ,l         0
+                                  0008059a         0   none ,l         0
   
-                                  00080596         0   none ,l         0
+                                  000805a0         0   none ,l         0
   
-                                  0008059e         0   none ,l         0
-FILE=spregld3
-                                  000805b2  000805d3        22
-  $sp_regld$3
-                                  000805b2         0   none ,g         2
-FILE=spregsv3
-                                  000805d4  000805f5        22
-  $sp_regsv$3
-                                  000805d4         0   none ,g         5
-FILE=sprgld23
-                                  000805f6  0008060b        16
-  $spregld2$3
-                                  000805f6         0   none ,g         3
-FILE=_initsct
-                                  0008060c  00080677        6c
-  __INITSCT
-                                  0008060c         0   none ,g         1
-  
-                                  0008062a         0   none ,l         0
-  
-                                  00080634         0   none ,l         0
-  
-                                  00080636         0   none ,l         0
-  
-                                  0008063a         0   none ,l         0
-  
-                                  0008064c         0   none ,l         0
-  
-                                  0008065a         0   none ,l         0
-  
-                                  00080660         0   none ,l         0
-  
-                                  00080664         0   none ,l         0
+                                  000805a4         0   none ,l         0
 
 SECTION=C
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_motor.obj
-                                  00080678  00080999       322
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_motor.obj
+                                  000805b8  000808d9       322
   _ACC_TABLE
-                                  00080678       322   data ,g         2
+                                  000805b8       322   data ,g         2
 
 SECTION=C$DSEC
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\dbsct.obj
-                                  0008099a  000809a5         c
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\dbsct.obj
+                                  000808da  000808e5         c
   _DTBL
-                                  0008099a         c   data ,l         0
+                                  000808da         c   data ,l         0
 
 SECTION=C$BSEC
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\dbsct.obj
-                                  000809a6  000809ad         8
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\dbsct.obj
+                                  000808e6  000808ed         8
   _BTBL
-                                  000809a6         8   data ,l         0
+                                  000808e6         8   data ,l         0
 
 SECTION=D
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_step_output.obj
-                                  000809ae  000809b3         6
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_input.obj
-                                  000809b4  000809b9         6
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_motor.obj
-                                  000809ba  000809bb         2
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.obj
-                                  000809bc  000809bf         4
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\sbrk.obj
-                                  000809c0  000809c3         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_step_output.obj
+                                  000808ee  000808f3         6
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_input.obj
+                                  000808f4  000808f7         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_motor.obj
+                                  000808f8  000808f9         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj
+                                  000808fa  000808fd         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\sbrk.obj
+                                  000808fe  00080901         4
 
 SECTION=B
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_step_output.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_step_output.obj
                                   00090000  00090001         2
   _Nphase$58
                                   00090000         2   data ,l         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.obj
-                                  00090002  00090005         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_input.obj
+                                  00090002  00090004         3
+  _sw_data0$61
+                                  00090002         1   data ,l         2
+  _sw_data1$62
+                                  00090003         1   data ,l         2
+  _sw_data2$63
+                                  00090004         1   data ,l         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj
+                                  00090006  00090009         4
   _SW_DATA
-                                  00090002         1   data ,g         3
+                                  00090006         1   data ,g         3
   _SENS_DATA
-                                  00090003         1   data ,g         3
+                                  00090007         1   data ,g         4
   _A
-                                  00090004         1   data ,g         4
+                                  00090008         1   data ,g         2
   _SENS_ERROR
-                                  00090005         1   data ,g         4
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\sbrk.obj
-                                  00090006  00090425       420
+                                  00090009         1   data ,g         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\sbrk.obj
+                                  0009000a  00090429       420
   _heap_area
-                                  00090006       420   data ,l         2
+                                  0009000a       420   data ,l         2
 
 SECTION=R
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_step_output.obj
-                                  00090426  0009042b         6
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\bios_step_output.obj
+                                  0009042a  0009042f         6
   _step$55
-                                  00090426         2   data ,l         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_input.obj
-                                  0009042c  00090431         6
-  _count_error$67
-                                  0009042c         2   data ,l         1
-  _a$61
-                                  0009042e         1   data ,l         0
-  _b$62
-                                  0009042f         1   data ,l         2
-  _count_sens$68
-                                  00090430         1   data ,l         1
-  _count_sw$69
-                                  00090431         1   data ,l         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\itask_motor.obj
-                                  00090432  00090433         2
+                                  0009042a         2   data ,l         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_input.obj
+                                  00090430  00090433         4
+  _i$64
+                                  00090430         2   data ,l         1
+  _j$65
+                                  00090432         2   data ,l         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\itask_motor.obj
+                                  00090434  00090435         2
   _ACC_STATE
-                                  00090432         2   data ,g         1
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\main.obj
-                                  00090434  00090437         4
-  _count
                                   00090434         2   data ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj
+                                  00090436  00090439         4
+  _count
+                                  00090436         2   data ,g         0
   _MOTOR_STATE
-                                  00090436         1   data ,g         3
+                                  00090438         1   data ,g         3
   _AGV_STATE
-                                  00090437         1   data ,g         3
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\sbrk.obj
-                                  00090438  0009043b         4
+                                  00090439         1   data ,g         3
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\sbrk.obj
+                                  0009043a  0009043d         4
   _brk
-                                  00090438         4   data ,l         2
+                                  0009043a         4   data ,l         2
 
 SECTION=DVectTable
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\VectTable.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\VectTable.obj
                                   000fe030  000fe123        f4
   _IntVect
                                   000fe030        f4   data ,g         0
 
 SECTION=S
-FILE=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\startup.obj
+FILE=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\startup.obj
                                   000ffe00  000ffeff       100
 
 *** Delete Symbols ***
@@ -308,7 +310,7 @@ No   Unit Name   Global.Symbol   Location External Infomation
 0002 bios_beep_output
      SECTION=P
                  _bios_beep_output
-                                 0008002c 0012(000804e1:P)
+                                 0008002c
 0003 bios_da_output
      SECTION=P
                  _bios_da_output
@@ -316,26 +318,30 @@ No   Unit Name   Global.Symbol   Location External Infomation
 0004 bios_led_output
      SECTION=P
                  _bios_led_output
-                                 00080050 0012(00080485:P)
+                                 00080050 0012(0008042b:P)
 0005 bios_sensor_input
      SECTION=P
                  _bios_sensor_input
                                  00080058 0009(00080113:P)
-                                          0010(000802c7:P)
-                                          0010(000802eb:P)
+                                          0010(00080329:P)
+                                          0010(00080331:P)
+                                          0010(0008033f:P)
 0006 bios_step_output
      SECTION=P
                  _bios_step_output
-                                 00080062 0011(00080391:P)
-                                          0011(000803cb:P)
-                                          0011(000803d9:P)
+                                 00080062 0011(00080395:P)
+                                          0011(000803cf:P)
+                                          0011(000803dd:P)
      SECTION=D
      SECTION=B
      SECTION=R
 0007 bios_sw_input
      SECTION=P
                  _bios_sw_input
-                                 000800b0 0010(00080321:P)
+                                 000800b0 0010(000802d1:P)
+                                          0010(000802e1:P)
+                                          0010(000802ed:P)
+                                          0010(0008031f:P)
 0008 dbsct
      SECTION=C$DSEC
      SECTION=C$BSEC
@@ -356,73 +362,72 @@ No   Unit Name   Global.Symbol   Location External Infomation
 0010 itask_input
      SECTION=P
                  _itask_input
-                                 000802bc 0015(000fe0c0:DVectTable)
+                                 000802bc 0012(0008041f:P)
+                                          0015(000fe0c0:DVectTable)
      SECTION=D
+     SECTION=B
      SECTION=R
 0011 itask_motor
      SECTION=P
                  _itask_motor
-                                 00080360 0015(000fe0a0:DVectTable)
+                                 00080364 0015(000fe0a0:DVectTable)
      SECTION=C
                  _ACC_TABLE
-                                 00080678 0011(0008039f:P)
-                                          0011(000803e7:P)
+                                 000805b8 0011(000803a3:P)
+                                          0011(000803eb:P)
      SECTION=R
                  _ACC_STATE
-                                 00090432 0011(00080374:P)
+                                 00090434 0011(00080378:P)
      SECTION=D
 0012 main
      SECTION=P
                  _agv_init
-                                 0008040c 0012(00080489:P)
+                                 00080410
                  _LED
-                                 0008047c 0012(0008048b:P)
+                                 00080412
                  _main
-                                 00080488 0014(0008052f:P)
+                                 00080414 0014(0008046f:P)
                  _main_beep
-                                 0008049a 0015(000fe0d0:DVectTable)
+                                 00080430 0015(000fe0d0:DVectTable)
      SECTION=B
                  _SW_DATA
-                                 00090002 0009(000801a3:P)
+                                 00090006 0009(000801a3:P)
                                           0009(000801b7:P)
-                                          0010(0008034d:P)
+                                          0010(00080325:P)
                  _SENS_DATA
-                                 00090003 0009(00080239:P)
-                                          0010(00080307:P)
-                                          0010(00080317:P)
+                                 00090007 0009(00080239:P)
+                                          0010(00080337:P)
+                                          0010(00080359:P)
+                                          0012(00080425:P)
                  _A
-                                 00090004 0009(000800c6:P)
+                                 00090008 0009(000800c6:P)
                                           0009(00080198:P)
-                                          0012(0008047f:P)
-                                          0012(0008048f:P)
                  _SENS_ERROR
-                                 00090005 0009(000800df:P)
+                                 00090009 0009(000800df:P)
                                           0009(00080165:P)
-                                          0010(000802e3:P)
-                                          0010(0008031d:P)
      SECTION=R
                  _count
-                                 00090434 0012(000804ac:P)
+                                 00090436
                  _MOTOR_STATE
-                                 00090436 0009(000800cc:P)
+                                 00090438 0009(000800cc:P)
                                           0009(000801cb:P)
-                                          0011(0008036e:P)
+                                          0011(00080372:P)
                  _AGV_STATE
-                                 00090437 0009(000800d2:P)
+                                 00090439 0009(000800d2:P)
                                           0009(000801ff:P)
-                                          0011(000803bb:P)
+                                          0011(000803bf:P)
      SECTION=D
 0013 sbrk
      SECTION=P
                  _sbrk
-                                 000804f2
+                                 00080432
      SECTION=D
      SECTION=B
      SECTION=R
 0014 startup
      SECTION=P
                  _PowerON_Reset
-                                 00080524 0015(000fe030:DVectTable)
+                                 00080464 0015(000fe030:DVectTable)
                                           0015(000fe034:DVectTable)
                                           0015(000fe038:DVectTable)
                                           0015(000fe03c:DVectTable)
@@ -487,29 +492,31 @@ No   Unit Name   Global.Symbol   Location External Infomation
 0016 mvn3
      SECTION=P
                  $MVN$3
-                                 00080532 0006(00080077:P)
+                                 00080472 0006(00080077:P)
 0017 spregld3
      SECTION=P
                  $sp_regld$3
-                                 000805b2 0009(00080191:P)
-                                          0011(00080407:P)
+                                 000804f2 0009(00080191:P)
+                                          0011(0008040b:P)
 0018 spregsv3
      SECTION=P
                  $sp_regsv$3
-                                 000805d4 0006(00080063:P)
+                                 00080514 0006(00080063:P)
                                           0009(000800b9:P)
                                           0009(00080217:P)
-                                          0011(00080361:P)
-                                          0013(000804f3:P)
+                                          0010(000802bd:P)
+                                          0011(00080365:P)
+                                          0013(00080433:P)
 0019 sprgld23
      SECTION=P
                  $spregld2$3
-                                 000805f6 0006(000800ad:P)
+                                 00080536 0006(000800ad:P)
                                           0009(00080289:P)
-                                          0013(00080521:P)
+                                          0010(00080361:P)
+                                          0013(00080461:P)
 0020 _initsct
      SECTION=P
                  __INITSCT
-                                 0008060c 0014(0008052b:P)
+                                 0008054c 0014(0008046b:P)
      SECTION=C$BSEC
      SECTION=C$DSEC

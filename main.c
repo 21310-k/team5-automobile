@@ -22,7 +22,7 @@
 int count=0;
 
 void agv_init(void)
-{
+{/*
 	LED_PORT = 0x00;
 	DA_PORT=0x80;
 	STEP_PORT=0x00;
@@ -31,34 +31,34 @@ void agv_init(void)
 	SYSCR &= 0xf7;
 
 	TCR0 = 0xa0;/* TCR0の設定						*/
-	TIOR0 = 0x8b;/* TIOR0の設定						*/
-	GRA0 = 624;/* GRA0の設定						*/
+//	TIOR0 = 0x8b;/* TIOR0の設定						*/
+//	GRA0 = 624;/* GRA0の設定						*/
+//
+//	TCR1 = 0xa6;/* TCR1の設定						*/
+//	TIER1 = 0xf9;/* TIER1の設定						*/
+//	GRA1=99;
 
-	TCR1 = 0xa6;/* TCR1の設定						*/
-	TIER1 = 0xf9;/* TIER1の設定						*/
-	GRA1=99;
+//	TCR2 = 0xa6;/* TCR2の設定						*/
+//	TIER2 = 0xf9;/* TIER2の設定						*/
+//	GRA2 = 999;
 
-	TCR2 = 0xa6;/* TCR2の設定						*/
-	TIER2 = 0xf9;/* TIER2の設定						*/
-	GRA2 = 999;
-
-	TCR3 = 0xa0;/* TCR3の設定						*/
-	TIER3 = 0xf9;/* TIER3の設定						*/
-	GRA3 = 12499;
+//	TCR3 = 0xa0;/* TCR3の設定						*/
+//	TIER3 = 0xf9;/* TIER3の設定						*/
+//	GRA3 = 12499;
 	
-	TCR4=0xa6;
-	TIER4=0xf9;
-	GRA4=9999;
+//	TCR4=0xa6;
+//	TIER4=0xf9;
+//	GRA4=9999;
 	
 
-	TSTR |= 0x0d;//ITU0/ITU2/ITU3 Start					*/
-	and_ccr(~0x80);/* ccrの割込み禁止フラグ(bit7)をクリア	*/
-
+//	TSTR |= 0x0d;//ITU0/ITU2/ITU3 Start					*/
+//	and_ccr(~0x80);/* ccrの割込み禁止フラグ(bit7)をクリア	*/
+//
 }
 
 void LED(void)//LEDを光らせる関数（現在の状態を知らせる）
 {
-	bios_led_output(A);
+//	bios_led_output(A);
 }
 
 /****************************************************************************************************************/
@@ -66,7 +66,13 @@ void LED(void)//LEDを光らせる関数（現在の状態を知らせる）
 /****************************************************************************************************************/
 int main(void)
 {	
-	int i;
+	unsigned int i=0;
+	while(-1){
+	for(i=0;i<=60000;i++){}
+	itask_input();
+	bios_led_output(SENS_DATA);
+}
+/*	int i;
 	int B;
 	agv_init();//関数の初期化
 
@@ -79,16 +85,15 @@ int main(void)
 		if ((A& 0x80) == 0x80)
 		{
 			TSTR|=0x10;
-		}
-	}
-	return 0;
+		}*/
+	return (0);
 }
 
 
 #pragma	interrupt main_beep
 void main_beep(void)
 {
-	TSR4&=~0x01;
+	/*TSR4&=~0x01;
 	if(count==6)
 	{
 		count=0;
@@ -107,5 +112,5 @@ void main_beep(void)
 		{
 			bios_beep_output(0);
 		}
-	}
+	}*/
 }
