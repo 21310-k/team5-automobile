@@ -11,7 +11,12 @@
 /****************************************************************************************************************/
 /*	bios_da_outputŠÖ”																							*/
 /****************************************************************************************************************/
-void bios_da_output(void)
-{
+// [ŠO•”•Ï”]@agvdef.h:30
+//            #define DA_PORT     (*(volatile unsigned char *)0xa0004)
 
+
+void bios_da_output(unsigned char dig_handlecontrol)
+{
+    // DA_PORT‚Ébios_da_output()‚Ìˆø”‚ğ“ü—Í‚·‚é.
+    DA_PORT = dig_handlecontrol;
 }
