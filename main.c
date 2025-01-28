@@ -23,6 +23,8 @@ void agv_init(void) {
     bios_led_output(0x00);         //LEDの消灯
     bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
 
+	SYSCR &= ~0x08;
+	
     //ITU0の初期化
     TCR0 = 0xa0;
     TIOR0 = 0x8b;
@@ -50,11 +52,12 @@ void agv_init(void) {
 
 
     //テスト用
-            //ハードウェアの初期化
-        MOTOR_STATE = MOTOR_STOP;        //モータの停止
+    //ハードウェアの初期化
+    MOTOR_STATE = MOTOR_STOP;        //モータの停止
     bios_led_output(0x00);         //LEDの消灯
     bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
     AGV_STATE = AGV_BOOT;
+	SYSCR &= ~0x80;
 
     //ITU0の初期化
     TCR0 = 0xa0;
