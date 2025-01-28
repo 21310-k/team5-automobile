@@ -7,21 +7,22 @@
 #include	"machine.h"								/* 組込み関数の定義											*/
 #include	"reg3052.h"								/* H8/3052Fの内蔵モジュール定義								*/
 #include	"agvdef.h"								/* 無人搬送車のデバイス定義									*/
+#include	<stdio.h>
 
 /****************************************************************************************************************/
 /*	bios_step_output関数																						*/
 /****************************************************************************************************************/
 void bios_step_output (void)
 {
-	static int step = 0;
-	unsigned char phase[4]={0x0c,0x06,0x03,0x09};
-	static int Nphase ;
+	static int step_count = 0;
+
+    unsigned char phase[4] = {0x09, 0x0c, 0x06, 0x02}; //モータの回転速度をphaseに入れる
 	
-	STEP_PORT = phase[step];
-	Nphase = phase[step];
-	step++;
-	if(step == 4){
-		step = 0;
-	}
-	
+    STEP_PORT = phase[step_count]; //モータの回転速度をモータに出力
+    step_count++; //モータの回転速度を、phaseをインシデントすることで、値を変える。
+
+    LED_PORT = step_count;
+    if (step_count == 4) {
+        step_count = 0;
+    }
 }
