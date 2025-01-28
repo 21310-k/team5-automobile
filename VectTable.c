@@ -12,10 +12,8 @@
 *************************************************************************/
 
 	extern	void	PowerON_Reset(void);
-	extern	void	itask_motor(void);
-	extern	void	itask_control(void);
+	extern	void	LED_interrupt(void);
 	extern	void	itask_input(void);
-	extern  void     main_beep(void);
 /************************************************************************
 	割込みベクタの定義
 	割込みベクタはセクションVectTableに置く				
@@ -59,13 +57,13 @@ const	unsigned int *IntVect[]={
 
 	PowerON_Reset,						/* 27: Reserve		*/
 
-	itask_motor,						/* 28: IMIA1(TIU1コンペアマッチ/インプットキャプチャA1)		*/
+	LED_interrupt,						/* 28: IMIA1(TIU1コンペアマッチ/インプットキャプチャA1)		*/
 	PowerON_Reset,						/* 29: IMIB1(TIU1コンペアマッチ/インプットキャプチャB1)		*/
 	PowerON_Reset,						/* 30: OVI1(TIU1オーバーフロー1)							*/
 
 	PowerON_Reset,						/* 31: Reserve		*/
 
-	itask_control,						/* 32: IMIA2(TIU2コンペアマッチ/インプットキャプチャA2)		*/
+	PowerON_Reset,						/* 32: IMIA2(TIU2コンペアマッチ/インプットキャプチャA2)		*/
 	PowerON_Reset,						/* 33: IMIB2(TIU2コンペアマッチ/インプットキャプチャB2)		*/
 	PowerON_Reset,						/* 34: OVI2(TIU2オーバーフロー2)							*/
 
@@ -77,7 +75,7 @@ const	unsigned int *IntVect[]={
 
 	PowerON_Reset,						/* 39: Reserve		*/
 
-	main_beep,						/* 40: IMIA4(TIU4コンペアマッチ/インプットキャプチャA4)		*/
+	PowerON_Reset,						/* 40: IMIA4(TIU4コンペアマッチ/インプットキャプチャA4)		*/
 	PowerON_Reset,						/* 41: IMIB4(TIU4コンペアマッチ/インプットキャプチャB4)		*/
 	PowerON_Reset,						/* 42: OVI4(TIU4オーバーフロー4)							*/
 

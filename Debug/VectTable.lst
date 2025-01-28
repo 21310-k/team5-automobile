@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 16:23:35 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:36:47 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\VectTable.c
+FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable.c
          1     /************************************************************************
          2         RAM領域に割込みベクタを設定する
          3         モニタ機能である仮想割込みベクタの使用を前提とするため，
@@ -18,104 +18,102 @@ FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\VectTab
         12     *************************************************************************/
         13     
         14         extern  void    PowerON_Reset(void);
-        15         extern  void    itask_motor(void);
-        16         extern  void    itask_control(void);
-        17         extern  void    itask_input(void);
-        18         extern  void     main_beep(void);
-        19     /************************************************************************
-        20         割込みベクタの定義
-        21         割込みベクタはセクションVectTableに置く             
-        22     *************************************************************************/
+        15         extern  void    LED_interrupt(void);
+        16         extern  void    itask_input(void);
+        17     /************************************************************************
+        18         割込みベクタの定義
+        19         割込みベクタはセクションVectTableに置く             
+        20     *************************************************************************/
+        21     
+        22     #pragma section VectTable
         23     
-        24     #pragma section VectTable
-        25     
-        26     const   unsigned int *IntVect[]={
-        27         PowerON_Reset,                      /* 0:  Reset        */
-        28         PowerON_Reset,                      /* 1:  Reserved     */
-        29         PowerON_Reset,                      /* 2:  Reserved     */
-        30         PowerON_Reset,                      /* 3:  Reserved     */
-        31         PowerON_Reset,                      /* 4:  Reserved     */
-        32         PowerON_Reset,                      /* 5:  Reserved     */
-        33         PowerON_Reset,                      /* 6:  Reserved     */
-        34         PowerON_Reset,                      /* 7:  NMI          */
-        35         PowerON_Reset,                      /* 8:  TRAPA0       */
-        36         PowerON_Reset,                      /* 9:  TRAPA1       */
-        37         PowerON_Reset,                      /* 10: TRAPA2       */
-        38         PowerON_Reset,                      /* 11: TRAPA3       */
-        39     
-        40         PowerON_Reset,                      /* 12: IRQ0         */
-        41         PowerON_Reset,                      /* 13: IRQ1         */
-        42         PowerON_Reset,                      /* 14: IRQ2         */
-        43         PowerON_Reset,                      /* 15: IRQ3         */
-        44         PowerON_Reset,                      /* 16: IRQ4         */
-        45         PowerON_Reset,                      /* 17: IRQ5         */
-        46     
-        47         PowerON_Reset,                      /* 18: Reserve      */
-        48         PowerON_Reset,                      /* 19: Reserve      */
-        49     
-        50         PowerON_Reset,                      /* 20: WOVI(インターバルタイマ)     */
-        51         PowerON_Reset,                      /* 21: CMI(コンペアマッチ)          */
-        52     
-        53         PowerON_Reset,                      /* 22: Reserve      */
-        54         PowerON_Reset,                      /* 23: Reserve      */
-        55     
-        56         PowerON_Reset,                      /* 24: IMIA0(TIU0コンペアマッチ/インプットキャプチャA0)     */
-        57         PowerON_Reset,                      /* 25: IMIB0(TIU0コンペアマッチ/インプットキャプチャB0)     */
-        58         PowerON_Reset,                      /* 26: OVI0(TIU0オーバーフロー0)                            */
+        24     const   unsigned int *IntVect[]={
+        25         PowerON_Reset,                      /* 0:  Reset        */
+        26         PowerON_Reset,                      /* 1:  Reserved     */
+        27         PowerON_Reset,                      /* 2:  Reserved     */
+        28         PowerON_Reset,                      /* 3:  Reserved     */
+        29         PowerON_Reset,                      /* 4:  Reserved     */
+        30         PowerON_Reset,                      /* 5:  Reserved     */
+        31         PowerON_Reset,                      /* 6:  Reserved     */
+        32         PowerON_Reset,                      /* 7:  NMI          */
+        33         PowerON_Reset,                      /* 8:  TRAPA0       */
+        34         PowerON_Reset,                      /* 9:  TRAPA1       */
+        35         PowerON_Reset,                      /* 10: TRAPA2       */
+        36         PowerON_Reset,                      /* 11: TRAPA3       */
+        37     
+        38         PowerON_Reset,                      /* 12: IRQ0         */
+        39         PowerON_Reset,                      /* 13: IRQ1         */
+        40         PowerON_Reset,                      /* 14: IRQ2         */
+        41         PowerON_Reset,                      /* 15: IRQ3         */
+        42         PowerON_Reset,                      /* 16: IRQ4         */
+        43         PowerON_Reset,                      /* 17: IRQ5         */
+        44     
+        45         PowerON_Reset,                      /* 18: Reserve      */
+        46         PowerON_Reset,                      /* 19: Reserve      */
+        47     
+        48         PowerON_Reset,                      /* 20: WOVI(インターバルタイマ)     */
+        49         PowerON_Reset,                      /* 21: CMI(コンペアマッチ)          */
+        50     
+        51         PowerON_Reset,                      /* 22: Reserve      */
+        52         PowerON_Reset,                      /* 23: Reserve      */
+        53     
+        54         PowerON_Reset,                      /* 24: IMIA0(TIU0コンペアマッチ/インプットキャプチャA0)     */
+        55         PowerON_Reset,                      /* 25: IMIB0(TIU0コンペアマッチ/インプットキャプチャB0)     */
+        56         PowerON_Reset,                      /* 26: OVI0(TIU0オーバーフロー0)                            */
+        57     
+        58         PowerON_Reset,                      /* 27: Reserve      */
         59     
-        60         PowerON_Reset,                      /* 27: Reserve      */
-        61     
-        62         itask_motor,                        /* 28: IMIA1(TIU1コンペアマッチ/インプットキャプチャA1)     */
-        63         PowerON_Reset,                      /* 29: IMIB1(TIU1コンペアマッチ/インプットキャプチャB1)     */
-        64         PowerON_Reset,                      /* 30: OVI1(TIU1オーバーフロー1)                            */
+        60         LED_interrupt,                      /* 28: IMIA1(TIU1コンペアマッチ/インプットキャプチャA1)     */
+        61         PowerON_Reset,                      /* 29: IMIB1(TIU1コンペアマッチ/インプットキャプチャB1)     */
+        62         PowerON_Reset,                      /* 30: OVI1(TIU1オーバーフロー1)                            */
+        63     
+        64         PowerON_Reset,                      /* 31: Reserve      */
         65     
-        66         PowerON_Reset,                      /* 31: Reserve      */
-        67     
-        68         itask_control,                      /* 32: IMIA2(TIU2コンペアマッチ/インプットキャプチャA2)     */
-        69         PowerON_Reset,                      /* 33: IMIB2(TIU2コンペアマッチ/インプットキャプチャB2)     */
-        70         PowerON_Reset,                      /* 34: OVI2(TIU2オーバーフロー2)                            */
+        66         PowerON_Reset,                      /* 32: IMIA2(TIU2コンペアマッチ/インプットキャプチャA2)     */
+        67         PowerON_Reset,                      /* 33: IMIB2(TIU2コンペアマッチ/インプットキャプチャB2)     */
+        68         PowerON_Reset,                      /* 34: OVI2(TIU2オーバーフロー2)                            */
+        69     
+        70         PowerON_Reset,                      /* 35: Reserve      */
         71     
-        72         PowerON_Reset,                      /* 35: Reserve      */
-        73     
-        74         itask_input,                        /* 36: IMIA3(TIU3コンペアマッチ/インプットキャプチャA3)     */
-        75         PowerON_Reset,                      /* 37: IMIB3(TIU3コンペアマッチ/インプットキャプチャB3)     */
-        76         PowerON_Reset,                      /* 38: OVI3(TIU3オーバーフロー3)                            */
+        72         itask_input,                        /* 36: IMIA3(TIU3コンペアマッチ/インプットキャプチャA3)     */
+        73         PowerON_Reset,                      /* 37: IMIB3(TIU3コンペアマッチ/インプットキャプチャB3)     */
+        74         PowerON_Reset,                      /* 38: OVI3(TIU3オーバーフロー3)                            */
+        75     
+        76         PowerON_Reset,                      /* 39: Reserve      */
         77     
-        78         PowerON_Reset,                      /* 39: Reserve      */
-        79     
-        80         main_beep,                      /* 40: IMIA4(TIU4コンペアマッチ/インプットキャプチャA4)     */
-        81         PowerON_Reset,                      /* 41: IMIB4(TIU4コンペアマッチ/インプットキャプチャB4)     */
-        82         PowerON_Reset,                      /* 42: OVI4(TIU4オーバーフロー4)                            */
+        78         PowerON_Reset,                      /* 40: IMIA4(TIU4コンペアマッチ/インプットキャプチャA4)     */
+        79         PowerON_Reset,                      /* 41: IMIB4(TIU4コンペアマッチ/インプットキャプチャB4)     */
+        80         PowerON_Reset,                      /* 42: OVI4(TIU4オーバーフロー4)                            */
+        81     
+        82         PowerON_Reset,                      /* 43: Reserve      */
         83     
-        84         PowerON_Reset,                      /* 43: Reserve      */
-        85     
-        86         PowerON_Reset,                      /* 44: DEND0A(DMAC0A 転送完了)      */
-        87         PowerON_Reset,                      /* 45: DEND0B(DMAC0B 転送完了)      */
-        88         PowerON_Reset,                      /* 46: DEND1A(DMAC1A 転送完了)      */
-        89         PowerON_Reset,                      /* 47: DEND1B(DMAC1B 転送完了)      */
-        90     
-        91         PowerON_Reset,                      /* 48: Reserve      */
-        92         PowerON_Reset,                      /* 49: Reserve      */
-        93         PowerON_Reset,                      /* 50: Reserve      */
-        94         PowerON_Reset,                      /* 51: Reserve      */
-        95     
-        96         PowerON_Reset,                      /* 52: ERI0 (SCI0 受信エラー)               */
-        97         PowerON_Reset,                      /* 53: RXI0 (SCI0 受信完了)                 */
-        98         PowerON_Reset,                      /* 54: TXI0 (SCI0 送信データエンプティ)     */
-        99         PowerON_Reset,                      /* 55: TEI0 (SCI0 送信終了)                 */
-       100     
-       101         PowerON_Reset,                      /* 56: ERI1 (SCI1 受信エラー)               */
-       102         PowerON_Reset,                      /* 57: RXI1 (SCI1 受信完了)                 */
-       103         PowerON_Reset,                      /* 58: TXI1 (SCI1 送信データエンプティ)     */
-       104         PowerON_Reset,                      /* 59: TEI1 (SCI1 送信終了)                 */
-       105     
-       106         PowerON_Reset                       /* 60: ADI (AD変換完了)     */
-       107     };
-       108     
-       109     #pragma section 
+        84         PowerON_Reset,                      /* 44: DEND0A(DMAC0A 転送完了)      */
+        85         PowerON_Reset,                      /* 45: DEND0B(DMAC0B 転送完了)      */
+        86         PowerON_Reset,                      /* 46: DEND1A(DMAC1A 転送完了)      */
+        87         PowerON_Reset,                      /* 47: DEND1B(DMAC1B 転送完了)      */
+        88     
+        89         PowerON_Reset,                      /* 48: Reserve      */
+        90         PowerON_Reset,                      /* 49: Reserve      */
+        91         PowerON_Reset,                      /* 50: Reserve      */
+        92         PowerON_Reset,                      /* 51: Reserve      */
+        93     
+        94         PowerON_Reset,                      /* 52: ERI0 (SCI0 受信エラー)               */
+        95         PowerON_Reset,                      /* 53: RXI0 (SCI0 受信完了)                 */
+        96         PowerON_Reset,                      /* 54: TXI0 (SCI0 送信データエンプティ)     */
+        97         PowerON_Reset,                      /* 55: TEI0 (SCI0 送信終了)                 */
+        98     
+        99         PowerON_Reset,                      /* 56: ERI1 (SCI1 受信エラー)               */
+       100         PowerON_Reset,                      /* 57: RXI1 (SCI1 受信完了)                 */
+       101         PowerON_Reset,                      /* 58: TXI1 (SCI1 送信データエンプティ)     */
+       102         PowerON_Reset,                      /* 59: TEI1 (SCI1 送信終了)                 */
+       103     
+       104         PowerON_Reset                       /* 60: ADI (AD変換完了)     */
+       105     };
+       106     
+       107     #pragma section 
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 16:23:35 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:36:47 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
@@ -136,13 +134,13 @@ TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
 ** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
 
-NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        5 
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        3 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        1 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          6 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          4 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\VectTable.obj -debug -list=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\VectTable.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\VectTable.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\VectTable.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\VectTable.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable.c -lang=c -nologo
 CPU         : 300ha:20

@@ -14,7 +14,7 @@ extern void main(void);				/* main関数は外部宣言である					*/
 void  PowerON_Reset(void)
 { 
 	_INITSCT();						/* データ処理領域の初期化関数(ライブラリ)	*/
-	
+
 	main();							/* main関数の呼出し							*/
 }
 

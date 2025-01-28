@@ -1,154 +1,154 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   22-Jan-2025 18:16:13 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:30:23 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\Soft2\main.c
+FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\main.c
          1     /****************************************************************************************************************/
          2     /*  FILE        :main.c                                                                                         */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
-         4     /****************************************************************************************************************/
-         5     /*  FILE        :main.c                                                                                         */
-         6     /*  DATE        :Tue, Jan 17, 2012                                                                              */
-         7     /*  DESCRIPTION :AGV Main Program                                                                               */
-         8     /*  CPU TYPE    :H8/3052F                                                                                       */
-         9     /****************************************************************************************************************/
-        10     #include    "stdio.h"
-        11     #define MAIN                                        /* マクロMAINの定義                                         */
-        12     
-        13     #include    "machine.h"                             /* 組込み関数の定義                                         */
-        14     #include    "reg3052.h"                             /* H8/3052Fの内蔵モジュール定義                             */
-        15     #include    "agvdef.h"                              /* 無人搬送車のデバイス定義                                 */
-        16     #include    "agvvars.h"                             /* 無人搬送車の共通変数を定義                               */
-        17     #include    "def_monitor_printf.h"
-        18     
-        19     /****************************************************************************************************************/
-        20     /*  AGVデバイス初期化モジュール agv_init                                                                        */
-        21     /****************************************************************************************************************/
-        22     int count=0;
-        23     
-        24     void agv_init(void)
-        25     {/*
-        26         LED_PORT = 0x00;
-        27         DA_PORT=0x80;
-        28         STEP_PORT=0x00;
-        29     
-        30         IPRA = 0x02;//ITU1を最優先にする
-        31         SYSCR &= 0xf7;
-        32     
-        33         TCR0 = 0xa0;/* TCR0の設定                       */
-        34     //  TIOR0 = 0x8b;/* TIOR0の設定                     */
-        35     //  GRA0 = 624;/* GRA0の設定                        */
-        36     //
-        37     //  TCR1 = 0xa6;/* TCR1の設定                       */
-        38     //  TIER1 = 0xf9;/* TIER1の設定                     */
-        39     //  GRA1=99;
-        40     
-        41     //  TCR2 = 0xa6;/* TCR2の設定                       */
-        42     //  TIER2 = 0xf9;/* TIER2の設定                     */
-        43     //  GRA2 = 999;
+         4     /*  DESCRIPTION :AGV Main Program                                                                               */
+         5     /*  CPU TYPE    :H8/3052F                                                                                       */
+         6     /****************************************************************************************************************/
+         7     #include    "stdio.h"
+         8     #define MAIN                                        /* マクロMAINの定義                                         */
+         9     
+        10     #include    "machine.h"                             /* 組込み関数の定義                                         */
+        11     #include    "reg3052.h"                             /* H8/3052Fの内蔵モジュール定義                             */
+        12     #include    "agvdef.h"                              /* 無人搬送車のデバイス定義                                 */
+        13     #include    "agvvars.h"                             /* 無人搬送車の共通変数を定義                               */
+        14     #include    "def_monitor_printf.h"
+        15     
+        16     /****************************************************************************************************************/
+        17     /*  AGVデバイス初期化モジュール agv_init                                                                        */
+        18     /****************************************************************************************************************/
+        19     void agv_init(void) {
+        20         //本番
+        21         //ハードウェアの初期化
+        22         MOTOR_STATE = MOTOR_STOP;        //モータの停止
+        23         bios_led_output(0x00);         //LEDの消灯
+        24         bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
+        25     
+        26         //ITU0の初期化
+        27         TCR0 = 0xa0;
+        28         TIOR0 = 0x8b;
+        29         GRA0 = 1249;
+        30     
+        31         //ITU1の初期化
+        32         TCR1 = 0xa6;
+        33         TIER1 |= 0xf9;
+        34     
+        35         //ITU2の初期化
+        36         TCR2 = 0xa6;
+        37         TIER2 |= 0xf9;
+        38         GRA2 = 99;
+        39     
+        40         //ITU3の初期化
+        41         TCR3 = 0xa6;
+        42         TIER3 |= 0xf9;
+        43         GRA3 = 9;
         44     
-        45     //  TCR3 = 0xa0;/* TCR3の設定                       */
-        46     //  TIER3 = 0xf9;/* TIER3の設定                     */
-        47     //  GRA3 = 12499;
-        48         
-        49     //  TCR4=0xa6;
-        50     //  TIER4=0xf9;
-        51     //  GRA4=9999;
-        52         
-        53     
-        54     //  TSTR |= 0x0d;//ITU0/ITU2/ITU3 Start                 */
-        55     //  and_ccr(~0x80);/* ccrの割込み禁止フラグ(bit7)をクリア   */
-        56     //
-        57     }
+        45         IPRA |= 0x02;  //ITU1の割込みをプライオリティレベル1に設定
+        46     
+        47     
+        48         TSTR |= 0x0d;            //ITU0・2・3をスタートする
+        49         and_ccr(~0x80);        //割込み許可
+        50     
+        51     
+        52         //テスト用
+        53                 //ハードウェアの初期化
+        54             MOTOR_STATE = MOTOR_STOP;        //モータの停止
+        55         bios_led_output(0x00);         //LEDの消灯
+        56         bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
+        57         AGV_STATE = AGV_BOOT;
         58     
-        59     void LED(void)//LEDを光らせる関数（現在の状態を知らせる）
-        60     {
-        61     //  bios_led_output(A);
-        62     }
+        59         //ITU0の初期化
+        60         TCR0 = 0xa0;
+        61         TIOR0 = 0x8b;
+        62         GRA0 = 1249;
         63     
-        64     /****************************************************************************************************************/
-        65     /*  main関数                                                                                                    */
-        66     /****************************************************************************************************************/
-        67     int main(void)
-        68     {   
-        69         unsigned int i=0;
-        70         while(-1){
-        71         for(i=0;i<=60000;i++){}
-        72         itask_input();
-        73         bios_led_output(SENS_DATA);
-        74     }
-        75     /*  int i;
-        76         int B;
-        77         agv_init();//関数の初期化
+        64         //ITU1の初期化
+        65         TCR1 = 0xa6;
+        66         TIER1 |= 0xf9;
+        67         GRA1 = 5000;
+        68     
+        69         //ITU2の初期化
+        70         TCR2 = 0xa6;
+        71         TIER2 |= 0xf9;
+        72         GRA2 = 5000;
+        73     
+        74         //ITU3の初期化
+        75         TCR3 = 0xa6;
+        76         TIER3 |= 0xf9;
+        77         GRA3 = 5000;
         78     
-        79         for (i = 0;; i++)//出力をさせる
-        80         {
-        81             LED();
-        82             
-        83             // bios_led_output(AGV_STATE);      
-        84             
-        85             if ((A& 0x80) == 0x80)
-        86             {
-        87                 TSTR|=0x10;
-        88             }*/
-        89         return (0);
-        90     }
-        91     
-        92     
-        93     #pragma interrupt main_beep
-        94     void main_beep(void)
-        95     {
-        96         /*TSR4&=~0x01;
-        97         if(count==6)
-        98         {
-        99             count=0;
-       100             TSTR &=~0x10;
-       101             TCNT4=0;
-       102         }
-       103         else
-       104         {
-       105             count +=1;
-       106             
-       107             if(count%2==1)
-       108             {
-       109                 bios_beep_output(1);
-       110             }
-       111             else
-       112             {
-       113                 bios_beep_output(0);
-       114             }
-       115         }*/
+        79         TSTR |= 0x0f;            //ITU0・1・2・3をスタートする
+        80         and_ccr(~0x80);        //割込み許可
+        81     }
+        82     
+        83     #pragma interrupt LED_interrupt
+        84     void LED_interrupt(void) {
+        85         static unsigned char LED_FLAG = 0;// 静的変数LED_FLAGを定義
+        86         if (LED_FLAG) {
+        87             bios_led_output(0x00);// LED_FLAGが0ならばLED全点灯
+        88         }
+        89         else {
+        90             bios_led_output(0xff);// LFLAGが0でなければLED全消灯
+        91         }
+        92         LED_FLAG = ~LED_FLAG;// LED_FLAGを反転する
+        93         TSR1 &= ~0x01;// ITU1の割込みフラグのクリア
+        94     }
+        95     
+        96     
+        97     /****************************************************************************************************************/
+        98     /*  main関数                                                                                                    */
+        99     /****************************************************************************************************************/
+       100     int main(void)
+       101     {   
+       102         unsigned int i = 0; 
+       103         while(-1){
+       104             for(i = 0; i < 60000; i++){}
+       105             bios_step_output();
+       106         }
+       107         return 0;
+       108     }
+       109     
+       110     /****************************************************************************************************************/
+       111     /*  beepモジュール beep                                                                                         */
+       112     /****************************************************************************************************************/
+       113     void beep(void)
+       114     {
+       115     
        116     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   22-Jan-2025 18:16:13 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:30:23 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x00000022 Byte(s)
+PROGRAM  SECTION(P):                                0x00000104 Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
-DATA     SECTION(D):                                0x00000004 Byte(s)
-BSS      SECTION(B):                                0x00000004 Byte(s)
+DATA     SECTION(D):                                0x00000003 Byte(s)
+BSS      SECTION(B):                                0x00000002 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x00000022 Byte(s)
+TOTAL PROGRAM  SECTION: 0x00000104 Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
-TOTAL DATA     SECTION: 0x00000004 Byte(s)
-TOTAL BSS      SECTION: 0x00000004 Byte(s)
+TOTAL DATA     SECTION: 0x00000003 Byte(s)
+TOTAL BSS      SECTION: 0x00000002 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x0000002A Byte(s)
+    TOTAL PROGRAM SIZE: 0x00000109 Byte(s)
 
 
 
 ** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
 
-NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        2 
-NUMBER OF EXTERNAL DEFINITION SYMBOLS:       11 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         15 
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        3 
+NUMBER OF EXTERNAL DEFINITION SYMBOLS:        8 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         16 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\Soft2\Debug\main.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\Soft2\main.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\main.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\main.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\main.c -lang=c -nologo
 CPU         : 300ha:20

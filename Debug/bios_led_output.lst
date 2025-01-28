@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 16:23:36 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:36 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\bios_led_output.c
+FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_led_output.c
          1     /****************************************************************************************************************/
          2     /*  FILE        : bios_led_output.c                                                                             */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -17,27 +17,27 @@ FILE NAME: C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\bios_le
         11     /****************************************************************************************************************/
         12     /*  bios_led_outputä÷êî                                                                                         */
         13     /****************************************************************************************************************/
-        14     void bios_led_output(unsigned char A)
+        14     void bios_led_output(void)
         15     {
-        16         LED_PORT=A;
+        16     
         17     }   
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   27-Nov-2024 16:23:36 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:36 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x00000008 Byte(s)
+PROGRAM  SECTION(P):                                0x00000002 Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
 DATA     SECTION(D):                                0x00000000 Byte(s)
 BSS      SECTION(B):                                0x00000000 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x00000008 Byte(s)
+TOTAL PROGRAM  SECTION: 0x00000002 Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
 TOTAL DATA     SECTION: 0x00000000 Byte(s)
 TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x00000008 Byte(s)
+    TOTAL PROGRAM SIZE: 0x00000002 Byte(s)
 
 
 
@@ -51,5 +51,5 @@ NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          1
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_led_output.obj -debug -list=C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\Debug\bios_led_output.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\soft2-20241127T060649Z-001\soft2\Soft2\bios_led_output.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_led_output.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_led_output.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_led_output.c -lang=c -nologo
 CPU         : 300ha:20

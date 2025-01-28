@@ -16,10 +16,83 @@
 /****************************************************************************************************************/
 /*	AGVデバイス初期化モジュール agv_init																		*/
 /****************************************************************************************************************/
-void agv_init(void)
-{
+void agv_init(void) {
+    //本番
+    //ハードウェアの初期化
+    MOTOR_STATE = MOTOR_STOP;        //モータの停止
+    bios_led_output(0x00);         //LEDの消灯
+    bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
 
+    //ITU0の初期化
+    TCR0 = 0xa0;
+    TIOR0 = 0x8b;
+    GRA0 = 1249;
+
+    //ITU1の初期化
+    TCR1 = 0xa6;
+    TIER1 |= 0xf9;
+
+    //ITU2の初期化
+    TCR2 = 0xa6;
+    TIER2 |= 0xf9;
+    GRA2 = 99;
+
+    //ITU3の初期化
+    TCR3 = 0xa6;
+    TIER3 |= 0xf9;
+    GRA3 = 9;
+
+    IPRA |= 0x02;  //ITU1の割込みをプライオリティレベル1に設定
+
+
+    TSTR |= 0x0d;            //ITU0・2・3をスタートする
+    and_ccr(~0x80);        //割込み許可
+
+
+    //テスト用
+            //ハードウェアの初期化
+        MOTOR_STATE = MOTOR_STOP;        //モータの停止
+    bios_led_output(0x00);         //LEDの消灯
+    bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
+    AGV_STATE = AGV_BOOT;
+
+    //ITU0の初期化
+    TCR0 = 0xa0;
+    TIOR0 = 0x8b;
+    GRA0 = 1249;
+
+    //ITU1の初期化
+    TCR1 = 0xa6;
+    TIER1 |= 0xf9;
+    GRA1 = 5000;
+
+    //ITU2の初期化
+    TCR2 = 0xa6;
+    TIER2 |= 0xf9;
+    GRA2 = 5000;
+
+    //ITU3の初期化
+    TCR3 = 0xa6;
+    TIER3 |= 0xf9;
+    GRA3 = 5000;
+
+    TSTR |= 0x0f;            //ITU0・1・2・3をスタートする
+    and_ccr(~0x80);        //割込み許可
 }
+
+#pragma interrupt LED_interrupt
+void LED_interrupt(void) {
+    static unsigned char LED_FLAG = 0;// 静的変数LED_FLAGを定義
+    if (LED_FLAG) {
+        bios_led_output(0x00);// LED_FLAGが0ならばLED全点灯
+    }
+    else {
+        bios_led_output(0xff);// LFLAGが0でなければLED全消灯
+    }
+    LED_FLAG = ~LED_FLAG;// LED_FLAGを反転する
+    TSR1 &= ~0x01;// ITU1の割込みフラグのクリア
+}
+
 
 /****************************************************************************************************************/
 /*	main関数																									*/
