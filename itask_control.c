@@ -25,6 +25,7 @@ void	itask_control(void)
 /****************************************************************************************************************/
 void agv_state(void)
 {
+	//センサ検出とはSENS_DATAが0x00の値以外であること
     switch (AGV_STATE) {
     case AGV_BOOT:
         if (SENS_DATA == 0x00 || SW_DATA == 0x01) {
@@ -36,6 +37,7 @@ void agv_state(void)
         break;
 
     case AGV_BOOT_ALM:
+	
         if (SENS_DATA == 0x00 || SW_DATA == 0x01) {
             AGV_STATE = AGV_BOOT_ALM;
         }
@@ -73,14 +75,15 @@ void agv_state(void)
         break;
 
     case AGV_RUN:
-        if (SW_DATA == 0x01 && MOTOR_STATE != MOTOR_STOP && SENS_DATA!=0x00) {
-            AGV_STATE = AGV_RUN;
-        }
+
         if (SW_DATA == 0x00) {
             AGV_STATE = AGV_STOP_WAIT;
         }
-        if (SENS_DATA == 0x00) {
+        if (SW_DATA == 0x01 && SENS_DATA == 0x00) {
             AGV_STATE = AGV_RUN_ALM;
+        }
+		if (SW_DATA == 0x01 && MOTOR_STATE != MOTOR_STOP && SENS_DATA!=0x00) {
+            AGV_STATE = AGV_RUN;
         }
         break;
 

@@ -83,14 +83,14 @@ void agv_init(void) {
     and_ccr(~0x80);        //割込み許可
 }
 
-#pragma interrupt LED_interrupt
+//#pragma interrupt LED_interrupt
 void LED_interrupt(void) {
     static unsigned char LED_FLAG = 0;// 静的変数LED_FLAGを定義
     if (LED_FLAG) {
-        bios_led_output(0x00);// LED_FLAGが0ならばLED全点灯
+        //bios_led_output(0x00);// LED_FLAGが0ならばLED全点灯
     }
     else {
-        bios_led_output(0xff);// LFLAGが0でなければLED全消灯
+        //bios_led_output(0xff);// LFLAGが0でなければLED全消灯
     }
     LED_FLAG = ~LED_FLAG;// LED_FLAGを反転する
     TSR1 &= ~0x01;// ITU1の割込みフラグのクリア
@@ -102,12 +102,30 @@ void LED_interrupt(void) {
 /****************************************************************************************************************/
 int main(void)
 {	
-	unsigned int i = 0; 
+	unsigned int i;
+	agv_init();
+	
+	//走行状態に設定	
+	AGV_STATE = AGV_RUN;
+	
+
+	//条件
+	SW_DATA = 0x00;// SENS_DATA = 0x01; MOTOR_STATE = MOTOR_CONST;
+	
+
+	
 	while(-1){
-		for(i = 0; i < 60000; i++){}
+			agv_state();
+			bios_led_output(AGV_STATE);	
+	}
+	//bios_step_output用テスト
+	
+	/*unsigned int i = 0;
+	
+	while(-1){
 		bios_step_output();
 	}
-	return 0;
+	return 0;*/
 }
 
 /****************************************************************************************************************/
