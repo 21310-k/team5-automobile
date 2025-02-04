@@ -1,31 +1,35 @@
 /****************************************************************************************************************/
-/*	FILE        : itask_control.c																				*/
-/*	DATE        :Tue, Jan 17, 2012																				*/
-/*	DESCRIPTION :AGVの動作状態管理割り込みタスク																*/
-/*	CPU TYPE    :H8/3052F																						*/
+/*  FILE        : itask_control.c                                                                               */
+/*  DATE        :Tue, Jan 17, 2012                                                                              */
+/*  DESCRIPTION :AGVの動作状態管理割り込みタスク                                                              */
+/*  CPU TYPE    :H8/3052F                                                                                       */
 /****************************************************************************************************************/
-#include	"machine.h"									/* 組込み関数の定義										*/
-#include	"reg3052.h"									/* H8/3052Fの内蔵モジュール定義							*/
-#include	"agvdef.h"									/* 無人搬送車のデバイス定義								*/
-#include	"agvvars.h"									/* 無人搬送車の共通変数を定義							*/
-#include	"def_monitor_printf.h"						/* 組込みprintfの定義									*/
+#include    "machine.h"                                 /* 組込み関数の定義                                     */
+#include    "reg3052.h"                                 /* H8/3052Fの内蔵モジュール定義                           */
+#include    "agvdef.h"                                  /* 無人搬送車のデバイス定義                             */
+#include    "agvvars.h"                                 /* 無人搬送車の共通変数を定義                            */
+#include    "def_monitor_printf.h"                      /* 組込みprintfの定義                                 */
+int i; //カウント用の変数
+unsigned char spos; //cal_sensor_position()で算出した位置情報を代入する変数
 
-int i; //全関数で共通な変数
 /****************************************************************************************************************/
-/*	搬送車動作状態監視・ハンドル制御タスク itask_control														*/
+/*  搬送車動作状態監視・ハンドル制御タスク itask_control                                                       */
 /****************************************************************************************************************/
-#pragma	interrupt itask_control
-void	itask_control(void)
+#pragma interrupt itask_control
+void    itask_control(void)
 {
-	
+    // ①ステートのフェッチと変更 (agv_state())
+    // ②センサ位置の計算(cal_sensor_position())
+    // ③ハンドル制御(handle_control())
+    //以上3つをitask_controlが割り込まれた際に実行する。
 }
 
 /****************************************************************************************************************/
-/*	AGVステート管理モジュール agv_state																			*/
+/*  AGVステート管理モジュール agv_state                                                                            */
 /****************************************************************************************************************/
 void agv_state(void)
 {
-	//センサ検出とはSENS_DATAが0x00の値以外であること
+    //センサ検出とはSENS_DATAが0x00の値以外であること
     switch (AGV_STATE) {
     case AGV_BOOT:
         if (SENS_DATA == 0x00 || SW_DATA == 0x01) {
@@ -37,7 +41,7 @@ void agv_state(void)
         break;
 
     case AGV_BOOT_ALM:
-	
+    
         if (SENS_DATA == 0x00 || SW_DATA == 0x01) {
             AGV_STATE = AGV_BOOT_ALM;
         }
@@ -82,7 +86,7 @@ void agv_state(void)
         if (SW_DATA == 0x01 && SENS_DATA == 0x00) {
             AGV_STATE = AGV_RUN_ALM;
         }
-		if (SW_DATA == 0x01 && MOTOR_STATE != MOTOR_STOP && SENS_DATA!=0x00) {
+        if (SW_DATA == 0x01 && MOTOR_STATE != MOTOR_STOP && SENS_DATA!=0x00) {
             AGV_STATE = AGV_RUN;
         }
         break;
@@ -113,29 +117,29 @@ void agv_state(void)
         break;
 
     }
-}    	
+}       
 
 /****************************************************************************************************************/
-//	センサ位置計算モジュール cal_sensor_position
+//  センサ位置計算モジュール cal_sensor_position
 // 引数：なし
-// 戻り値：センサの位置情報																*/
+// 戻り値：センサの位置情報                                                             */
 /****************************************************************************************************************/
 
 unsigned char cal_sensor_position(void)
 {
     // weight(i)=16+32*iの計算式に則り、重みを設定
-    unsigned char weight[8] = { 16, 32, 48, 64, 80, 96, 112, 128 };
+    unsigned char weight[8] = {16, 48, 80, 112, 144, 176, 208, 240};
     // センサ入力を取得
     unsigned char sens_input = bios_sensor_input();
     // 必要な変数を定義
-    unsigned char molecule = 0;
-    unsigned char denominator = 0;
+    unsigned int molecule = 0;
+    unsigned int denominator = 0;
     unsigned char position = 0;
 
     // 各桁について見ていく
     for (i = 0; i < 8; i++) {
         // sens_inputのi桁目が1の場合
-        if (sens_input & (1 << i)) {
+        if ((sens_input & (1 << i))!=0) {
             // 分子に重みを加算
             molecule += weight[i];
             // 分母を加算
@@ -144,30 +148,38 @@ unsigned char cal_sensor_position(void)
     }
 
     //  positionを算出
-    position = molecule / denominator;
+	if(denominator == 0){return 0;}
+    position =(unsigned char)( molecule / denominator);
+	printf("postion = %d\n",position);
     // positionを返す
     return position;
     
 }
 
 /****************************************************************************************************************/
-//	ハンドル制御モジュール handle_control
+//  ハンドル制御モジュール handle_control
 // 引数：cal_sensor_pos()で算出した位置情報
-// 戻り値：なし																		*/
+// 戻り値：なし                                                                       */
 /****************************************************************************************************************/
-
+//sposはcal_sensor_pos()で算出した位置情報
 void handle_control(unsigned char spos)
 {
     // ずれ量diffを求める
-    unsigned char diff = spos - HANDLE_CENTER;
+    int diff = spos - HANDLE_CENTER;
     // 現在のハンドル切れ角adを取得
     unsigned char ad = bios_ad_input();
     // 変数定義
-    unsigned char da_output = 0;
+    int da_output = 0;
 
     // dに17/32を乗じたものを現在のハンドル切れ角adに加えたものが制御値に求められる。
-    da_output = diff * 17 / 32 + ad;
     
+	da_output = diff * 17 / 32;
+	da_output = da_output + (int)(ad);
+	
+    if (da_output < 0){da_output = 0;}
+	if (da_output > 255){da_output = 255;}
+	
     // 制御値を出力
+	bios_led_output(ad);
     bios_da_output(da_output);
 }
