@@ -1,59 +1,142 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:38 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\itask_motor.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_motor.c
          1     /*****************************************************************************************************************
-         2     /*  FILE        : itask_motor.c                                                                                 */
-         3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
-         4     /*  DESCRIPTION :AGVの走行管理割り込みタスク                                                                    */
-         5     /*  CPU TYPE    :H8/3052F                                                                                       */
+         2     /*    FILE        : itask_motor.c                                                                                    */
+         3     /*    DATE        :Tue, Jan 17, 2012                                                                                */
+         4     /*    DESCRIPTION :AGVの走行管理割り込みタスク                                                                    */
+         5     /*    CPU TYPE    :H8/3052F                                                                                        */
          6     /****************************************************************************************************************/
-         7     #include    "machine.h"                                 /* 組込み関数の定義                                     */
-         8     #include    "reg3052.h"                                 /* H8/3052Fの内蔵モジュール定義                         */
-         9     #include    "agvdef.h"                                  /* 無人搬送車のデバイス定義                             */
-        10     #include    "agvvars.h"                                 /* 無人搬送車の共通変数を定義                           */
+         7     #include    "machine.h"                                /* 組込み関数の定義                                        */
+         8     #include    "reg3052.h"                                    /* H8/3052Fの内蔵モジュール定義                            */
+         9     #include    "agvdef.h"                                    /* 無人搬送車のデバイス定義                                */
+        10     #include    "agvvars.h"                                    /* 無人搬送車の共通変数を定義                            */
         11     #include    "def_monitor_printf.h"
-        12     #include    "Acc_Table.h"                               /* 加速テーブルの読み出し                               */
-        13     
-        14     /****************************************************************************************************************/
-        15     /*  走行モータ制御タスク itask_motor                                                                            */
-        16     /****************************************************************************************************************/
-        17     #pragma interrupt itask_motor
-        18     void itask_motor(void)
-        19     {
-        20     
-        21     }
+        12     #include    "Acc_Table.h"                                /* 加速テーブルの読み出し                                */
+        13     /****************************************************************************************************************/
+        14     /*    走行モータ制御タスク itask_motor                                                                            */
+        15     /****************************************************************************************************************/
+        16     /***********************************************************************************************/
+        17     
+        18     
+        19     #pragma    interrupt itask_motor
+        20     /*
+        21     この関数では, 
+        22     1. モータの回転状態を変化する.
+        23     2. モータの状態を制御する.
+        24     3. モータの状態をもとに, 加速テーブルとGRA1を用いた, 割り込みするタイミングを変化する.  
+        25        つまり, itask_motorが呼び出されるタイミングを変化することでモータの回転はじめを変える. 
+        26     */
+        27     void itask_motor(void)
+        28     {
+        29     
+        30         int static pointer = 0;
+        31     
+        32         /*
+        33         このタスクが起動されたときに、MOTOR_STATEが「MOTOR_STOP以外の条件」ではモータの励磁出力を順番に出力する
+        34         つまり, モータを回転する
+        35         */
+        36         if (MOTOR_STATE != MOTOR_STOP) {
+        37             //return MOTOR_STATE;
+        38             bios_step_output();
+        39             printf("モータの状態は%u", MOTOR_STATE);
+        40         }
+        41         else {
+        42             MOTOR_STATE = MOTOR_STOP;
+        43         }
+        44     
+        45     
+        46         switch (MOTOR_STATE) {
+        47         //モータ停止状態のとき
+        48         case MOTOR_STOP:
+        49             pointer = 0; /*ポインタ変数を初期化*/
+        50             GRA1 = ACC_TABLE[pointer]; /*加速テーブルの先頭の値をGRA1にセットする.*/
+        51             MOTOR_STATE = MOTOR_ACC; /*モータの状態を加速状態に遷移する*/
+        52             break;
+        53     
+        54         //モータが加速状態の時
+        55         case MOTOR_ACC: {
+        56             /*
+        57             加速テーブルのポインタを現在の状態からインクリメントする
+        58             つまり, 割り込み周期が変わっている. つまり, itask_motorの呼び出す周期が変わる. 
+        59             */
+        60             pointer++;
+        61             GRA1 = ACC_TABLE[pointer]; 
+        62     
+        63             /*テーブルポインタが(テーブル数-1)と等しくなったときモータが定速状態になる*/
+        64             if (pointer == 400) {
+        65                 MOTOR_STATE = MOTOR_CONST;
+        66             }
+        67             /*加速中にAGV_STOP_WAITあるいはAGV_RUN_ALMになれば減速状態になる*/
+        68             if ((AGV_STATE == AGV_STOP_WAIT) || (AGV_STATE == AGV_RUN_ALM)) {
+        69                 MOTOR_STATE = MOTOR_BREAK;
+        70             }
+        71             break;
+        72         }
+        73     
+        74         /*モータが低速状態の時*/
+        75         case MOTOR_CONST: {
+        76             /*定速中にAGV_STOP_WAITあるいはAGV_RUN_ALMになれば減速状態になる*/
+        77             if ((AGV_STATE == AGV_STOP_WAIT) || (AGV_STATE == AGV_RUN_ALM)) {
+        78                 MOTOR_STATE = MOTOR_BREAK;
+        79             }
+        80             break;
+        81         }
+        82     
+        83         /*モータが停止状態の時*/
+        84         case MOTOR_BREAK: {
+        85             //itask_motorの呼び出す速度を遅くする. 
+        86             pointer--; /*ポインタの値をデクリメント*/
+        87             GRA1 = ACC_TABLE[pointer]; /*GRA1にテーブルの値をセット*/
+        88             /*テーブルの値が0になるとMOTOR_STATEを停止状態にする*/
+        89             if (pointer == 0) {
+        90                 MOTOR_STATE = MOTOR_STOP;
+        91                 /*ITUの動作を停止する*/
+        92                 TCNT1 = 0;
+        93             }
+        94             break;
+        95         }
+        96     
+        97         default:
+        98             break;
+        99         }
+       100         //printf("モータの状態は%u", MOTOR_STATE); //テスト用
+       101         //ITU1の割り込みフラグをクリア
+       102         TSR1 &= ~0x01;
+       103     }
+       104     
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:38 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x00000002 Byte(s)
-CONSTANT SECTION(C):                                0x0000000A Byte(s)
-DATA     SECTION(D):                                0x00000000 Byte(s)
+PROGRAM  SECTION(P):                                0x000000D6 Byte(s)
+CONSTANT SECTION(C):                                0x0000001B Byte(s)
+DATA     SECTION(D):                                0x00000002 Byte(s)
 BSS      SECTION(B):                                0x00000000 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x00000002 Byte(s)
-TOTAL CONSTANT SECTION: 0x0000000A Byte(s)
-TOTAL DATA     SECTION: 0x00000000 Byte(s)
+TOTAL PROGRAM  SECTION: 0x000000D6 Byte(s)
+TOTAL CONSTANT SECTION: 0x0000001B Byte(s)
+TOTAL DATA     SECTION: 0x00000002 Byte(s)
 TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x0000000C Byte(s)
+    TOTAL PROGRAM SIZE: 0x000000F3 Byte(s)
 
 
 
 ** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
 
-NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        0 
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        5 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        2 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          2 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         19 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\itask_motor.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\itask_motor.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\itask_motor.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_motor.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_motor.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_motor.c -lang=c -nologo
 CPU         : 300ha:20

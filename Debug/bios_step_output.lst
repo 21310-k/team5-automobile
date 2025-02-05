@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:37 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:03 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_step_output.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_step_output.c
          1     /****************************************************************************************************************/
          2     /*  FILE        : bios_step_output.c                                                                            */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -34,7 +34,7 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_step
         28     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:37 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:03 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
@@ -62,5 +62,5 @@ NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          7
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_step_output.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_step_output.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_step_output.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_step_output.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_step_output.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_step_output.c -lang=c -nologo
 CPU         : 300ha:20

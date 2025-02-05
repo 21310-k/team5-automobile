@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:30:23 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\main.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\main.c
          1     /****************************************************************************************************************/
          2     /*  FILE        :main.c                                                                                         */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -19,136 +19,131 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\main.c
         13     #include    "agvvars.h"                             /* 無人搬送車の共通変数を定義                               */
         14     #include    "def_monitor_printf.h"
         15     
-        16     /****************************************************************************************************************/
-        17     /*  AGVデバイス初期化モジュール agv_init                                                                        */
-        18     /****************************************************************************************************************/
-        19     void agv_init(void) {
-        20         //本番
-        21         //ハードウェアの初期化
-        22         MOTOR_STATE = MOTOR_STOP;        //モータの停止
-        23         bios_led_output(0x00);         //LEDの消灯
-        24         bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
-        25     
-        26         //ITU0の初期化
-        27         TCR0 = 0xa0;
-        28         TIOR0 = 0x8b;
-        29         GRA0 = 1249;
-        30     
-        31         //ITU1の初期化
-        32         TCR1 = 0xa6;
-        33         TIER1 |= 0xf9;
-        34     
-        35         //ITU2の初期化
-        36         TCR2 = 0xa6;
-        37         TIER2 |= 0xf9;
-        38         GRA2 = 99;
-        39     
-        40         //ITU3の初期化
-        41         TCR3 = 0xa6;
-        42         TIER3 |= 0xf9;
-        43         GRA3 = 9;
-        44     
-        45         IPRA |= 0x02;  //ITU1の割込みをプライオリティレベル1に設定
-        46     
-        47     
-        48         TSTR |= 0x0d;            //ITU0・2・3をスタートする
-        49         and_ccr(~0x80);        //割込み許可
-        50     
-        51     
-        52         //テスト用
-        53                 //ハードウェアの初期化
-        54             MOTOR_STATE = MOTOR_STOP;        //モータの停止
-        55         bios_led_output(0x00);         //LEDの消灯
-        56         bios_da_output(HANDLE_CENTER);  //ハンドルを中心に移動する
-        57         AGV_STATE = AGV_BOOT;
-        58     
-        59         //ITU0の初期化
-        60         TCR0 = 0xa0;
-        61         TIOR0 = 0x8b;
-        62         GRA0 = 1249;
+        16     //変数の仮定義
+        17     unsigned char agv_init(void);
+        18     void task_main(unsigned char agv_state);
+        19     
+        20     /****************************************************************************************************************/
+        21     /*  AGVデバイス初期化モジュール agv_init                                                                        */
+        22     /****************************************************************************************************************/
+        23     /*!
+        24         @brief 無人搬送車の初期化を行います
+        25         @param void
+        26         @return void
+        27         @details 無人搬送車の初期化を行います
+        28     */
+        29     
+        30     unsigned char agv_init(void)
+        31     {
+        32         
+        33         /*ハードウェアの初期化*/
+        34         MOTOR_STATE = MOTOR_STOP;        /*モータの停止*/
+        35         bios_led_output(0x00);         /*LEDの消灯*/
+        36         bios_da_output(HANDLE_CENTER);  /*ハンドルを中心に移動する*/
+        37         AGV_STATE = AGV_BOOT;        /*起動モード*/
+        38         
+        39         /*ITU0の初期化*/
+        40         TCR0=0xa0;    /*GRA0で内部クロックφでコンペアマッチ*/
+        41         TIOR0=0x8b;   /*GRA0はアウトプットコンペアレジスタとして使用*/
+        42         GRA0=649;     /*100μs*/
+        43          
+        44         /*ITU1の初期化*/
+        45         TCR1=0xa6;    /*外部クロックCを使用*/
+        46         TIER1|=0xf9;  /*ITU1は割込みを行う*/
+        47          
+        48         /*ITU2の初期化*/
+        49         TCR2=0xa6;    /*外部クロックCを使用*/
+        50         TIER2|=0xf9;  /*ITU2は割込みを行う*/
+        51         GRA2=99;      /*100μs×100=10ms*/
+        52          
+        53         /*ITU3の初期化*/
+        54         TCR3=0xa6;    /*外部クロックCを使用*/
+        55         TIER3|=0xf9;  /*ITU3は割込みを行う*/
+        56         GRA3=9;        /*100μs×10=1ms*/
+        57     
+        58         IPRA|=0x02;  /*ITU1の割込みをプライオリティレベル1に設定*/
+        59         SYSCR&=~0x08;          /*SYSCRのUIビットをクリア*/
+        60         and_ccr(~0x80);        /*すべての割込み許可*/
+        61         TSTR|=0x0d;            /*ITU0,2,3をスタートする*/
+        62     }
         63     
-        64         //ITU1の初期化
-        65         TCR1 = 0xa6;
-        66         TIER1 |= 0xf9;
-        67         GRA1 = 5000;
-        68     
-        69         //ITU2の初期化
-        70         TCR2 = 0xa6;
-        71         TIER2 |= 0xf9;
-        72         GRA2 = 5000;
-        73     
-        74         //ITU3の初期化
-        75         TCR3 = 0xa6;
-        76         TIER3 |= 0xf9;
-        77         GRA3 = 5000;
-        78     
-        79         TSTR |= 0x0f;            //ITU0・1・2・3をスタートする
-        80         and_ccr(~0x80);        //割込み許可
-        81     }
-        82     
-        83     #pragma interrupt LED_interrupt
-        84     void LED_interrupt(void) {
-        85         static unsigned char LED_FLAG = 0;// 静的変数LED_FLAGを定義
-        86         if (LED_FLAG) {
-        87             bios_led_output(0x00);// LED_FLAGが0ならばLED全点灯
-        88         }
-        89         else {
-        90             bios_led_output(0xff);// LFLAGが0でなければLED全消灯
-        91         }
-        92         LED_FLAG = ~LED_FLAG;// LED_FLAGを反転する
-        93         TSR1 &= ~0x01;// ITU1の割込みフラグのクリア
-        94     }
-        95     
-        96     
-        97     /****************************************************************************************************************/
-        98     /*  main関数                                                                                                    */
-        99     /****************************************************************************************************************/
-       100     int main(void)
-       101     {   
-       102         unsigned int i = 0; 
-       103         while(-1){
-       104             for(i = 0; i < 60000; i++){}
-       105             bios_step_output();
+        64     
+        65     
+        66     /****************************************************************************************************************/
+        67     /*  main関数                                                                                                    */
+        68     /****************************************************************************************************************/
+        69     int main(void){
+        70         while(-1){
+        71             task_main(AGV_STATE);
+        72             
+        73         }
+        74         return(0);
+        75     }
+        76     
+        77     void task_main(unsigned char agv_state) {
+        78         
+        79         counter++;
+        80         
+        81         if(counter>1000){
+        82             counter=0;
+        83         }
+        84         switch (agv_state) {
+        85             
+        86             case AGV_READY_ALM:
+        87                 break;
+        88                 
+        89             case AGV_BOOT_ALM:
+        90                 break;
+        91                 
+        92             case AGV_RUN_ALM:
+        93                 if (counter < 500) { // 1秒の間隔で点滅（500ms ON, 500ms OFF）
+        94                     bios_led_output(0xFF); // LEDを点灯
+        95                     bios_beep_output(1); // ブザーをON
+        96                 } else {
+        97                     bios_led_output(0x00); // LEDを消灯
+        98                     bios_beep_output(0); // ブザーをOFF
+        99                 }
+       100                 break;
+       101      
+       102             default: // それ以外の状態
+       103                 bios_led_output(0x00); // LEDを全部消灯
+       104                 bios_beep_output(0); // ブザーをOFF
+       105                 break;
        106         }
-       107         return 0;
-       108     }
+       107     }
+       108     
        109     
-       110     /****************************************************************************************************************/
-       111     /*  beepモジュール beep                                                                                         */
-       112     /****************************************************************************************************************/
-       113     void beep(void)
-       114     {
-       115     
-       116     }
+       110     
+       111     
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:30:23 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x00000104 Byte(s)
+PROGRAM  SECTION(P):                                0x000000C0 Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
-DATA     SECTION(D):                                0x00000003 Byte(s)
+DATA     SECTION(D):                                0x00000004 Byte(s)
 BSS      SECTION(B):                                0x00000002 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x00000104 Byte(s)
+TOTAL PROGRAM  SECTION: 0x000000C0 Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
-TOTAL DATA     SECTION: 0x00000003 Byte(s)
+TOTAL DATA     SECTION: 0x00000004 Byte(s)
 TOTAL BSS      SECTION: 0x00000002 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x00000109 Byte(s)
+    TOTAL PROGRAM SIZE: 0x000000C6 Byte(s)
 
 
 
 ** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
 
-NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        3 
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        5 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        8 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         16 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         18 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\main.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\main.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\main.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\main.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\main.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\main.c -lang=c -nologo
 CPU         : 300ha:20

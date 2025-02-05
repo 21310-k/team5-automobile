@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:36:48 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\itask_input.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c
          1     /****************************************************************************************************************/
          2     /*  FILE        : itask_input.c                                                                                 */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -57,65 +57,69 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\itask_inp
         51     {
         52         static unsigned char sw_data0,sw_data1,sw_data2;
         53         static int i=0,j=0;
-        54         if(i==0){
-        55             sw_data0=bios_sw_input(); //iが0の時、スイッチの値をsw_data0に代入
-        56         }
-        57         else if(i==1){
-        58             sw_data1=bios_sw_input(); //iが１の時、スイッチの値をsw_data1に代入
-        59         }
-        60         else{
-        61             sw_data2=bios_sw_input(); //iが２の時、スイッチの値をsw_data2に代入
-        62         }
-        63         i++;
-        64         if(i==3){//iが３になったら０になるようにする
-        65             i=0;
+        54         TSR3&=~0x01;
+        55         and_ccr(~0x80);
+        56         counter++;
+        57         
+        58         if(i==0){
+        59             sw_data0=bios_sw_input(); //iが0の時、スイッチの値をsw_data0に代入
+        60         }
+        61         else if(i==1){
+        62             sw_data1=bios_sw_input(); //iが１の時、スイッチの値をsw_data1に代入
+        63         }
+        64         else{
+        65             sw_data2=bios_sw_input(); //iが２の時、スイッチの値をsw_data2に代入
         66         }
-        67         
-        68         if((sw_data0==sw_data1)&&(sw_data1==sw_data2)){//過去３回のスイッチの値が一致した場合にSW_DATAにスイッチの値を代入
-        69             SW_DATA=bios_sw_input();
+        67         i++;
+        68         if(i==3){//iが３になったら０になるようにする
+        69             i=0;
         70         }
         71         
-        72         if(0x00!=bios_sensor_input()){
-        73             SENS_DATA=bios_sensor_input(); 
-        74             j=0;
-        75         }
-        76         else if(0==bios_sensor_input()){
-        77             j++;
-        78         }
-        79         if(j==10){
-        80             SENS_DATA=0;
-        81             j=0;
+        72         if((sw_data0==sw_data1)&&(sw_data1==sw_data2)){//過去３回のスイッチの値が一致した場合にSW_DATAにスイッチの値を代入
+        73             SW_DATA=bios_sw_input();
+        74         }
+        75         
+        76         if(0x00!=bios_sensor_input()){
+        77             SENS_DATA=bios_sensor_input(); 
+        78             j=0;
+        79         }
+        80         else if(0==bios_sensor_input()){
+        81             j++;
         82         }
-        83     }
+        83         if(j==10){
+        84             SENS_DATA=0;
+        85             j=0;
+        86         }
+        87     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:36:48 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x000000BA Byte(s)
+PROGRAM  SECTION(P):                                0x000000CC Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
 DATA     SECTION(D):                                0x00000004 Byte(s)
 BSS      SECTION(B):                                0x00000003 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x000000BA Byte(s)
+TOTAL PROGRAM  SECTION: 0x000000CC Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
 TOTAL DATA     SECTION: 0x00000004 Byte(s)
 TOTAL BSS      SECTION: 0x00000003 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x000000C1 Byte(s)
+    TOTAL PROGRAM SIZE: 0x000000D3 Byte(s)
 
 
 
 ** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
 
-NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        6 
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        7 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        1 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         21 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         22 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\itask_input.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\itask_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\itask_input.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_input.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c -lang=c -nologo
 CPU         : 300ha:20

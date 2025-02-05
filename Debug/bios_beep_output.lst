@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:35 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:02 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_beep_output.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_beep_output.c
          1     /****************************************************************************************************************/
          2     /*  FILE        : bios_beep_output.c                                                                            */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -17,27 +17,27 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_beep
         11     /****************************************************************************************************************/
         12     /*  bios_beep_outputä÷êî                                                                                        */
         13     /****************************************************************************************************************/
-        14     void bios_beep_output(void)
+        14     void bios_beep_output(char is_beep)
         15     {
-        16     
+        16         BEEP_PORT = (is_beep == 0 ) ? BEEP_OFF : BEEP_ON;
         17     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:35 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:02 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x00000002 Byte(s)
+PROGRAM  SECTION(P):                                0x00000010 Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
 DATA     SECTION(D):                                0x00000000 Byte(s)
 BSS      SECTION(B):                                0x00000000 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x00000002 Byte(s)
+TOTAL PROGRAM  SECTION: 0x00000010 Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
 TOTAL DATA     SECTION: 0x00000000 Byte(s)
 TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x00000002 Byte(s)
+    TOTAL PROGRAM SIZE: 0x00000010 Byte(s)
 
 
 
@@ -45,11 +45,11 @@ TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
 NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        0 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        1 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          1 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          2 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_beep_output.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_beep_output.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_beep_output.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_beep_output.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_beep_output.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_beep_output.c -lang=c -nologo
 CPU         : 300ha:20

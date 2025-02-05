@@ -51,6 +51,10 @@ void itask_input(void)
 {
 	static unsigned char sw_data0,sw_data1,sw_data2;
 	static int i=0,j=0;
+	TSR3&=~0x01;
+	and_ccr(~0x80);
+	counter++;
+	
 	if(i==0){
 		sw_data0=bios_sw_input(); //iが0の時、スイッチの値をsw_data0に代入
 	}

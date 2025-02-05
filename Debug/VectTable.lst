@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:36:47 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:02 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\VectTable.c
          1     /************************************************************************
          2         RAM領域に割込みベクタを設定する
          3         モニタ機能である仮想割込みベクタの使用を前提とするため，
@@ -16,10 +16,10 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable
         10         外部宣言領域                
         11         割込み関数を外部ファイルで定義する場合は，ここで外部宣言を行なう
         12     *************************************************************************/
-        13     
-        14         extern  void    PowerON_Reset(void);
-        15         extern  void    LED_interrupt(void);
-        16         extern  void    itask_input(void);
+        13         extern  void    PowerON_Reset(void);
+        14         extern  void    itask_control(void);
+        15         extern  void    itask_input(void);
+        16         extern  void    itask_motor(void);
         17     /************************************************************************
         18         割込みベクタの定義
         19         割込みベクタはセクションVectTableに置く             
@@ -63,13 +63,13 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable
         57     
         58         PowerON_Reset,                      /* 27: Reserve      */
         59     
-        60         LED_interrupt,                      /* 28: IMIA1(TIU1コンペアマッチ/インプットキャプチャA1)     */
+        60         itask_motor,                        /* 28: IMIA1(TIU1コンペアマッチ/インプットキャプチャA1)     */
         61         PowerON_Reset,                      /* 29: IMIB1(TIU1コンペアマッチ/インプットキャプチャB1)     */
         62         PowerON_Reset,                      /* 30: OVI1(TIU1オーバーフロー1)                            */
         63     
         64         PowerON_Reset,                      /* 31: Reserve      */
         65     
-        66         PowerON_Reset,                      /* 32: IMIA2(TIU2コンペアマッチ/インプットキャプチャA2)     */
+        66         itask_control,                      /* 32: IMIA2(TIU2コンペアマッチ/インプットキャプチャA2)     */
         67         PowerON_Reset,                      /* 33: IMIB2(TIU2コンペアマッチ/インプットキャプチャB2)     */
         68         PowerON_Reset,                      /* 34: OVI2(TIU2オーバーフロー2)                            */
         69     
@@ -113,7 +113,7 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable
        107     #pragma section 
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:36:47 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:02 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
@@ -134,13 +134,13 @@ TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
 ** ASSEMBLER/LINKAGE EDITOR LIMITS INFORMATION **
 
-NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        3 
+NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        4 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        1 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          4 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          5 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\VectTable.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\VectTable.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\VectTable.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\VectTable.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\VectTable.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\VectTable.c -lang=c -nologo
 CPU         : 300ha:20

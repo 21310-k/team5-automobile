@@ -13,9 +13,9 @@
 #include	"agvvars.h"								/* 無人搬送車の共通変数を定義								*/
 #include	"def_monitor_printf.h"
 
-int beep(void);
-void agv_init(void);
-void led_out(void);
+//変数の仮定義
+unsigned char agv_init(void);
+void task_main(unsigned char agv_state);
 
 /****************************************************************************************************************/
 /*	AGVデバイス初期化モジュール agv_init																		*/
@@ -27,182 +27,85 @@ void led_out(void);
     @details 無人搬送車の初期化を行います
 */
 
-void agv_init(void)
+unsigned char agv_init(void)
 {
-	//割り込み処理初期設定
-	TCR0=0xA0;
-	TIOR0=0x8B;
-	GRA0=(625-1);
 	
+	/*ハードウェアの初期化*/
+	MOTOR_STATE = MOTOR_STOP;        /*モータの停止*/
+	bios_led_output(0x00);         /*LEDの消灯*/
+	bios_da_output(HANDLE_CENTER);  /*ハンドルを中心に移動する*/
+	AGV_STATE = AGV_BOOT;		 /*起動モード*/
 	
+	/*ITU0の初期化*/
+	TCR0=0xa0;    /*GRA0で内部クロックφでコンペアマッチ*/
+	TIOR0=0x8b;   /*GRA0はアウトプットコンペアレジスタとして使用*/
+	GRA0=649;     /*100μs*/
+	 
+	/*ITU1の初期化*/
+	TCR1=0xa6;    /*外部クロックCを使用*/
+	TIER1|=0xf9;  /*ITU1は割込みを行う*/
+	 
+	/*ITU2の初期化*/
+	TCR2=0xa6;    /*外部クロックCを使用*/
+	TIER2|=0xf9;  /*ITU2は割込みを行う*/
+	GRA2=99;      /*100μs×100=10ms*/
+	 
+	/*ITU3の初期化*/
+	TCR3=0xa6;    /*外部クロックCを使用*/
+	TIER3|=0xf9;  /*ITU3は割込みを行う*/
+	GRA3=9;        /*100μs×10=1ms*/
 
-	TIER1=0xf9;
-	TCR1=0xA6;
-//	TIOR1=0x89;
-	
-
-	TIER2=0xf9;
-	TCR2=0xA6;
-//	TIOR2=0x89;
-	GRA2=(100-1);
-	
-
-
-
-	TIER3=0xf9;
-	TCR3=0xA6;
-//	TIOR3=0x89;
-	GRA3=(10-1);
-	
-	
-    // DAの初期化
-    bios_da_output(0x7f);
-    // ステッピングモータの初期化
-    bios_step_output(0x00);
-    // センサの初期化
-    SENS_DATA = 0x00;
-	SW_DATA = 0x00;
-	
-	IPRA=0x02;
-	TSTR |= 0x0f;
-//	TSTR |= 0x0d;
-	SYSCR&=~0x08; 
-	and_ccr(0x7f);
+	IPRA|=0x02;  /*ITU1の割込みをプライオリティレベル1に設定*/
+	SYSCR&=~0x08;          /*SYSCRのUIビットをクリア*/
+	and_ccr(~0x80);        /*すべての割込み許可*/
+	TSTR|=0x0d;            /*ITU0,2,3をスタートする*/
 }
+
 
 
 /****************************************************************************************************************/
 /*	main関数																									*/
 /****************************************************************************************************************/
-/*int main(void)
-{	
-	for(;;)
-	{
-		agv_init();
-		itask_input();
-		bios_led_output(SENS_DATA);
-		itask_control();
+int main(void){
+    while(-1){
+        task_main(AGV_STATE);
+		
+    }
+    return(0);
+}
 
+void task_main(unsigned char agv_state) {
+	
+    counter++;
+	
+    if(counter>1000){
+        counter=0;
 	}
-	return 0;
-}*/
-int main(void)
-{
-
- 	agv_init();
-	
-//	MOTOR_STATE=MOTOR_ACC;
-	for (;;) {
-		led_out();
-		//bios_led_output(SENS_DATA);
-		//LED_PORT = AGV_STATE;
-		//bios_led_output(SENS_DATA);
-		//	MOTOR_STATE=MOTOR_ACC;
-		/*
-		bios_da_output(127);
-		KAKU_STATE=(bios_ad_input()-127)/10;	
-		if (KAKU_STATE==0){
-			KAKU_STATE=1;
-		}
-		else if(KAKU_STATE<0)
-		{
-			KAKU_STATE=(KAKU_STATE*-1);
-		}
-		bios_led_output(KAKU_STATE);
-		*/
-		/*
-		SENS_DATA = ~SENS_PORT;
-		SW_DATA = SW_PORT;
-		MOTOR_STATE = MOTOR_ACC;
-		itask_control();
-		LED_PORT = AGV_STATE;
+    switch (agv_state) {
 		
-		*/		
-		/*
-		(SW_DATA & 0x07) == 1;
-		SENS_DATA = 0x01;
-		*/
-	//	beep();
-	}
-  	return 0; 
+        case AGV_READY_ALM:
+			break;
+			
+        case AGV_BOOT_ALM:
+			break;
+			
+        case AGV_RUN_ALM:
+            if (counter < 500) { // 1秒の間隔で点滅（500ms ON, 500ms OFF）
+                bios_led_output(0xFF); // LEDを点灯
+                bios_beep_output(1); // ブザーをON
+            } else {
+                bios_led_output(0x00); // LEDを消灯
+                bios_beep_output(0); // ブザーをOFF
+            }
+            break;
+ 
+        default: // それ以外の状態
+            bios_led_output(0x00); // LEDを全部消灯
+            bios_beep_output(0); // ブザーをOFF
+            break;
+    }
 }
 
 
-/****************************************************************************************************************/
-/*	beepモジュール beep																							*/
-/****************************************************************************************************************/
-int beep(void){
-int i;
-for ( i = 0; i < 3; i++) {
-			bios_beep_output(0x01);
-			sleep_func(45000);
-			bios_beep_output(0x00);
-			sleep_func(45000);
-}
-sleep_func(180000);
 
-for ( i = 0; i < 3; i++) {
-			bios_beep_output(0x01);
-			sleep_func(45000);
-			bios_beep_output(0x00);
-			sleep_func(45000);
-}
-sleep_func(180000);
-
-for ( i = 0; i < 7; i++) {
-			bios_beep_output(0x01);
-			sleep_func(45000);
-			bios_beep_output(0x00);
-			sleep_func(45000);
-}
-sleep_func(180000);
-}
-
-/*
- sleep function;
-*/
-
-int sleep_func(unsigned int sleep_time) {
-	int i = 0;
-	for (i = 0; i <= sleep_time ; i++);
-}
-unsigned char led_state[]={0x55,0xaa};
-int state_index=0;
-
-void led_out(){
-	switch(AGV_STATE){
-		case AGV_READY:
-		bios_led_output(0xFF);
-		break;
-		
-	
-		case AGV_RUN:
-		if (GRA1 >=300){
-                        previos_led_state=0x55;
-			bios_led_output(0x55);
-		}
-		else if (GRA1<300){
-			previos_led_state=0xaa;
-			bios_led_output(0xAA);
-		}
-		else {
-			bios_led_output(0x00);
-		}
-		break;
-	
-		case AGV_STOP_WAIT:
-		bios_led_output(0xff);
-		break;
-		
-		case AGV_RUN_AGAIN:
-		bios_led_output(previos_led_state);
-		break;
-		
-		default:
-		bios_led_output(0x00);
-		break;
-		}
-	
-	
-}
 

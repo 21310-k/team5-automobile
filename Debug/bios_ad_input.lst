@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:35 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:02 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_ad_input.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_ad_input.c
          1     /****************************************************************************************************************/
          2     /*  FILE        : bios_ad_input.c                                                                               */
          3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
@@ -17,27 +17,36 @@ FILE NAME: C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_ad_i
         11     /****************************************************************************************************************/
         12     /*  bios_ad_input関数                                                                                           */
         13     /****************************************************************************************************************/
-        14     void bios_ad_input(void)
-        15     {
-        16     
-        17     }
+        14     //レポート AD/DAの操作を参照
+        15     unsigned char bios_ad_input(void)
+        16     {
+        17         SH_PORT = SAMPLE_MODE;
+        18         nop();
+        19         nop();
+        20         nop();
+        21         nop();
+        22         SH_PORT = HOLD_MODE; 
+        23         AD_PORT = 0x00; //なんでもいいので書き込むとad変換開始
+        24         while (P8DR & 0x01); //bit0だけ見てる　p8drはda変換器の変換終了時に1になるみたい
+        25         return(AD_PORT); //da変換結果を出力(unsigned char)
+        26     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)   28-Jan-2025 15:00:35 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:02 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
-PROGRAM  SECTION(P):                                0x00000002 Byte(s)
+PROGRAM  SECTION(P):                                0x0000002C Byte(s)
 CONSTANT SECTION(C):                                0x00000000 Byte(s)
 DATA     SECTION(D):                                0x00000000 Byte(s)
 BSS      SECTION(B):                                0x00000000 Byte(s)
 
-TOTAL PROGRAM  SECTION: 0x00000002 Byte(s)
+TOTAL PROGRAM  SECTION: 0x0000002C Byte(s)
 TOTAL CONSTANT SECTION: 0x00000000 Byte(s)
 TOTAL DATA     SECTION: 0x00000000 Byte(s)
 TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
-    TOTAL PROGRAM SIZE: 0x00000002 Byte(s)
+    TOTAL PROGRAM SIZE: 0x0000002C Byte(s)
 
 
 
@@ -45,11 +54,11 @@ TOTAL BSS      SECTION: 0x00000000 Byte(s)
 
 NUMBER OF EXTERNAL REFERENCE  SYMBOLS:        0 
 NUMBER OF EXTERNAL DEFINITION SYMBOLS:        1 
-NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          1 
+NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          2 
 
 
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_ad_input.obj -debug -list=C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\Debug\bios_ad_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Downloads\soft2_test\soft2\soft2\soft2\Soft2\bios_ad_input.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_ad_input.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_ad_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_ad_input.c -lang=c -nologo
 CPU         : 300ha:20

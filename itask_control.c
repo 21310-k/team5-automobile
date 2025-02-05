@@ -9,19 +9,39 @@
 #include    "agvdef.h"                                  /* 無人搬送車のデバイス定義                             */
 #include    "agvvars.h"                                 /* 無人搬送車の共通変数を定義                            */
 #include    "def_monitor_printf.h"                      /* 組込みprintfの定義                                 */
-int i; //カウント用の変数
-unsigned char spos; //cal_sensor_position()で算出した位置情報を代入する変数
+
+
+
 
 /****************************************************************************************************************/
 /*  搬送車動作状態監視・ハンドル制御タスク itask_control                                                       */
 /****************************************************************************************************************/
+//関数の仮宣言
+void agv_state(void);
+unsigned char cal_sensor_position(void);
+void handle_control(unsigned char spos);
+
+//変数の定義
+unsigned char calculated_pos;
+int i;
+
 #pragma interrupt itask_control
 void    itask_control(void)
 {
+	//優先度1の割り込みを許可
+	and_ccr(~0x40);
+	
     // ①ステートのフェッチと変更 (agv_state())
     // ②センサ位置の計算(cal_sensor_position())
     // ③ハンドル制御(handle_control())
     //以上3つをitask_controlが割り込まれた際に実行する。
+	agv_state();
+	calculated_pos = cal_sensorposition();
+	handle_control(calculated_pos);
+	
+	//ITU2の割り込みフラグをクリア
+	TSR2 &= ~0x01;
+	
 }
 
 /****************************************************************************************************************/

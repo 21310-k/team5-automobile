@@ -52,7 +52,22 @@
 [WINDOW_POSITION_STATE_DATA_VD3]
 [WINDOW_POSITION_STATE_DATA_VD4]
 [WINDOW_Z_ORDER]
-"C:\z\s4teacher\soft2\Soft2\Debug\Soft2.map" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\VectTable.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\itask_motor.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_beep_output.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_ad_input.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_sw_input.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\itask_control.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\main.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\itask_input.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\agvdef.h" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\agvvars.h" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_led_output.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\def_monitor_printf.h" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\dbsct.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_step_output.c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_sensor_input..c" 
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge\soft2\bios_da_output.c" 
 [STATUSBAR_STATEINFO_VD1]
 "MasterShowState" 1 
 "ApplicationShowState" 1 
