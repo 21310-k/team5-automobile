@@ -1,9 +1,9 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:05 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:44:56 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\startup.c
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\startup.c
          1     /************************************************************************/
          2     /*  FILE        :startup.c                                              */
          3     /*  DATE        :Tue, Jan 17, 2012                                      */
@@ -26,7 +26,7 @@ FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\startup.c
         20     
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:05 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:44:56 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
@@ -56,5 +56,5 @@ NUMBER OF INTERNAL/EXTERNAL SYMBOLS:          3
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\startup.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\startup.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\startup.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\startup.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\startup.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\startup.c -lang=c -nologo
 CPU         : 300ha:20

@@ -1,35 +1,548 @@
-Optimizing Linkage Editor (V.9.04.01.000)         05-Feb-2025 16:18:05
+Optimizing Linkage Editor (V.9.04.01.000)         05-Feb-2025 18:46:07
 
 *** Options ***
 
--subcommand=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\Soft2.hlk
+-subcommand=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\Soft2.hlk
 -noprelink
 -rom=D=R
 -nomessage
--list="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\Soft2.map"
+-list="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\Soft2.map"
 -show=symbol,reference,xreference,total_size
 -nooptimize
 -start=P,C,C$DSEC,C$BSEC,D/080000,B,R/090000,DVectTable/0FE030,S/0FFE00
 -nologo
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_ad_input.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_beep_output.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_da_output.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_led_output.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_sensor_input.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_step_output.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\bios_sw_input.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\dbsct.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_control.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_input.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_motor.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\main.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\sbrk.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\startup.obj"
--input="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\VectTable.obj"
--library="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\Soft2.lib"
--output="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\Soft2.abs"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_ad_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_beep_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_da_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_led_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_sensor_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_step_output.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_sw_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\dbsct.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_control.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_motor.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\main.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\sbrk.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\startup.obj"
+-input="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\VectTable.obj"
+-library="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\Soft2.lib"
+-output="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\Soft2.abs"
 -end
 
 *** Error information ***
 
-** L2310 (E) Undefined external symbol "_cal_sensorposition" referenced in "C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_control.obj"
+*** Mapping List ***
+
+SECTION                            START      END         SIZE   ALIGN
+
+P
+                                  00080000  00080757       758   2
+C
+                                  00080758  00080ab9       362   2
+C$DSEC
+                                  00080aba  00080ac5         c   2
+C$BSEC
+                                  00080ac6  00080acd         8   2
+D
+                                  00080ace  00080ae9        1c   2
+B
+                                  00090000  0009042d       42e   2
+R
+                                  0009042e  00090449        1c   2
+DVectTable
+                                  000fe030  000fe123        f4   2
+S
+                                  000ffe00  000ffeff       100   2
+
+*** Total Section Size ***
+
+RAMDATA SECTION:  0000054a Byte(s)
+ROMDATA SECTION:  00000486 Byte(s)
+PROGRAM SECTION:  00000758 Byte(s)
+
+*** Symbol List ***
+
+SECTION=
+FILE=                               START        END    SIZE
+  SYMBOL                            ADDR        SIZE    INFO      COUNTS  OPT
+
+SECTION=P
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_ad_input.obj
+                                  00080000  0008002b        2c
+  _bios_ad_input
+                                  00080000        2c   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_beep_output.obj
+                                  0008002c  0008003b        10
+  _bios_beep_output
+                                  0008002c        10   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_da_output.obj
+                                  0008003c  00080043         8
+  _bios_da_output
+                                  0008003c         8   func ,g         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_led_output.obj
+                                  00080044  0008004b         8
+  _bios_led_output
+                                  00080044         8   func ,g         3
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_sensor_input.obj
+                                  0008004c  00080055         a
+  _bios_sensor_input
+                                  0008004c         a   func ,g         3
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_step_output.obj
+                                  00080056  000800a3        4e
+  _bios_step_output
+                                  00080056        4e   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_sw_input.obj
+                                  000800a4  000800ab         8
+  _bios_sw_input
+                                  000800a4         8   func ,g         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_control.obj
+                                  000800ac  00080325       27a
+  _itask_control
+                                  000800ac        28   func ,g         1
+  _agv_state
+                                  000800d4       194   func ,g         1
+  _cal_sensor_position
+                                  00080268        74   func ,g         1
+  _handle_control
+                                  000802dc        4a   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.obj
+                                  00080326  000803f1        cc
+  _itask_input
+                                  00080326        cc   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_motor.obj
+                                  000803f2  00080511       120
+  _itask_motor
+                                  000803f2       120   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\main.obj
+                                  00080512  000805d1        c0
+  _agv_init
+                                  00080512        68   func ,g         1
+  _main
+                                  0008057a         c   func ,g         1
+  _task_main
+                                  00080586        4c   func ,g         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\sbrk.obj
+                                  000805d2  00080603        32
+  _sbrk
+                                  000805d2        32   func ,g         0
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\startup.obj
+                                  00080604  00080611         e
+  _PowerON_Reset
+                                  00080604         e   entry,g        3a
+FILE=mvn3
+                                  00080612  00080691        80
+  $MVN$3
+                                  00080612         0   none ,g         2
+  
+                                  00080630         0   none ,l         0
+  
+                                  0008063c         0   none ,l         0
+  
+                                  00080650         0   none ,l         0
+  
+                                  0008065a         0   none ,l         0
+  
+                                  0008065e         0   none ,l         0
+  
+                                  0008066c         0   none ,l         0
+  
+                                  00080672         0   none ,l         0
+  
+                                  00080676         0   none ,l         0
+  
+                                  0008067e         0   none ,l         0
+FILE=spregld3
+                                  00080692  000806b3        22
+  $sp_regld$3
+                                  00080692         0   none ,g         2
+FILE=spregsv3
+                                  000806b4  000806d5        22
+  $sp_regsv$3
+                                  000806b4         0   none ,g         7
+FILE=sprgld23
+                                  000806d6  000806eb        16
+  $spregld2$3
+                                  000806d6         0   none ,g         5
+FILE=_initsct
+                                  000806ec  00080757        6c
+  __INITSCT
+                                  000806ec         0   none ,g         1
+  
+                                  0008070a         0   none ,l         0
+  
+                                  00080714         0   none ,l         0
+  
+                                  00080716         0   none ,l         0
+  
+                                  0008071a         0   none ,l         0
+  
+                                  0008072c         0   none ,l         0
+  
+                                  0008073a         0   none ,l         0
+  
+                                  00080740         0   none ,l         0
+  
+                                  00080744         0   none ,l         0
+
+SECTION=C
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_control.obj
+                                  00080758  00080777        20
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_motor.obj
+                                  00080778  00080ab9       342
+  _ACC_TABLE
+                                  00080778       322   data ,g         1
+
+SECTION=C$DSEC
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\dbsct.obj
+                                  00080aba  00080ac5         c
+  _DTBL
+                                  00080aba         c   data ,l         0
+
+SECTION=C$BSEC
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\dbsct.obj
+                                  00080ac6  00080acd         8
+  _BTBL
+                                  00080ac6         8   data ,l         0
+
+SECTION=D
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_step_output.obj
+                                  00080ace  00080ad3         6
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_control.obj
+                                  00080ad4  00080adb         8
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.obj
+                                  00080adc  00080adf         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_motor.obj
+                                  00080ae0  00080ae1         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\main.obj
+                                  00080ae2  00080ae5         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\sbrk.obj
+                                  00080ae6  00080ae9         4
+
+SECTION=B
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_control.obj
+                                  00090000  00090004         5
+  _i
+                                  00090000         2   data ,g         1
+  _calculated_pos
+                                  00090002         1   data ,g         1
+  _frag_state
+                                  00090003         1   data ,g         2
+  _frag_motor_state
+                                  00090004         1   data ,g         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.obj
+                                  00090006  00090008         3
+  _sw_data0$60
+                                  00090006         1   data ,l         2
+  _sw_data1$61
+                                  00090007         1   data ,l         2
+  _sw_data2$62
+                                  00090008         1   data ,l         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_motor.obj
+                                  0009000a  0009000b         2
+  _frag_state_motor
+                                  0009000a         1   data ,g         2
+  _frag_motor_state_motor
+                                  0009000b         1   data ,g         2
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\main.obj
+                                  0009000c  0009000d         2
+  _SW_DATA
+                                  0009000c         1   data ,g         2
+  _SENS_DATA
+                                  0009000d         1   data ,g         4
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\sbrk.obj
+                                  0009000e  0009042d       420
+  _heap_area
+                                  0009000e       420   data ,l         2
+
+SECTION=R
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\bios_step_output.obj
+                                  0009042e  00090433         6
+  _step_count$95
+                                  0009042e         2   data ,l         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_control.obj
+                                  00090434  0009043b         8
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.obj
+                                  0009043c  0009043f         4
+  _i$63
+                                  0009043c         2   data ,l         1
+  _j$64
+                                  0009043e         2   data ,l         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_motor.obj
+                                  00090440  00090441         2
+  _pointer$63
+                                  00090440         2   data ,l         1
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\main.obj
+                                  00090442  00090445         4
+  _counter
+                                  00090442         2   data ,g         2
+  _MOTOR_STATE
+                                  00090444         1   data ,g         3
+  _AGV_STATE
+                                  00090445         1   data ,g         5
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\sbrk.obj
+                                  00090446  00090449         4
+  _brk
+                                  00090446         4   data ,l         2
+
+SECTION=DVectTable
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\VectTable.obj
+                                  000fe030  000fe123        f4
+  _IntVect
+                                  000fe030        f4   data ,g         0
+
+SECTION=S
+FILE=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\startup.obj
+                                  000ffe00  000ffeff       100
+
+*** Delete Symbols ***
+
+SYMBOL                                SIZE    INFO
+
+*** Variable Accessible with Abs8 ***
+
+SYMBOL                                SIZE    COUNTS  OPTIMIZE
+
+*** Variable Accessible with Abs16 ***
+
+SYMBOL                                SIZE    COUNTS  OPTIMIZE
+
+*** Function Call ***
+
+SYMBOL                              COUNTS  OPTIMIZE
+
+*** Cross Reference List ***
+
+No   Unit Name   Global.Symbol   Location External Infomation
+---- ----------- --------------- -------- ---------------------
+0001 bios_ad_input
+     SECTION=P
+                 _bios_ad_input
+                                 00080000 0009(000802e9:P)
+0002 bios_beep_output
+     SECTION=P
+                 _bios_beep_output
+                                 0008002c 0012(000805cb:P)
+0003 bios_da_output
+     SECTION=P
+                 _bios_da_output
+                                 0008003c 0009(0008031d:P)
+                                          0012(00080523:P)
+0004 bios_led_output
+     SECTION=P
+                 _bios_led_output
+                                 00080044 0012(0008051b:P)
+                                          0012(000805b9:P)
+                                          0012(000805c5:P)
+0005 bios_sensor_input
+     SECTION=P
+                 _bios_sensor_input
+                                 0008004c 0010(000803ad:P)
+                                          0010(000803b5:P)
+                                          0010(000803c3:P)
+0006 bios_step_output
+     SECTION=P
+                 _bios_step_output
+                                 00080056 0011(0008041d:P)
+     SECTION=D
+     SECTION=R
+0007 bios_sw_input
+     SECTION=P
+                 _bios_sw_input
+                                 000800a4 0010(00080355:P)
+                                          0010(00080365:P)
+                                          0010(00080371:P)
+                                          0010(000803a3:P)
+0008 dbsct
+     SECTION=C$DSEC
+     SECTION=C$BSEC
+     SECTION=D
+     SECTION=R
+     SECTION=B
+     SECTION=R
+0009 itask_control
+     SECTION=P
+                 _itask_control
+                                 000800ac 0015(000fe0b0:DVectTable)
+                 _agv_state
+                                 000800d4 0009(000800b7:P)
+                 _cal_sensor_position
+                                 00080268 0009(000800b9:P)
+                 _handle_control
+                                 000802dc 0009(000800c3:P)
+     SECTION=B
+                 _i
+                                 00090000 0009(00080274:P)
+                 _calculated_pos
+                                 00090002 0009(000800bf:P)
+                 _frag_state
+                                 00090003 0009(000800f5:P)
+                                          0009(0008021f:P)
+                 _frag_motor_state
+                                 00090004 0009(000800fd:P)
+                                          0009(0008022b:P)
+     SECTION=C
+     SECTION=D
+     SECTION=R
+0010 itask_input
+     SECTION=P
+                 _itask_input
+                                 00080326 0015(000fe0c0:DVectTable)
+     SECTION=D
+     SECTION=B
+     SECTION=R
+0011 itask_motor
+     SECTION=P
+                 _itask_motor
+                                 000803f2 0015(000fe0a0:DVectTable)
+     SECTION=C
+                 _ACC_TABLE
+                                 00080778 0011(00080428:P)
+     SECTION=B
+                 _frag_state_motor
+                                 0009000a 0011(0008040f:P)
+                                          0011(000804bb:P)
+                 _frag_motor_state_motor
+                                 0009000b 0011(00080417:P)
+                                          0011(000804c7:P)
+     SECTION=D
+     SECTION=R
+0012 main
+     SECTION=P
+                 _agv_init
+                                 00080512 0012(0008057b:P)
+                 _main
+                                 0008057a 0014(0008060f:P)
+                 _task_main
+                                 00080586 0012(00080583:P)
+     SECTION=B
+                 _SW_DATA
+                                 0009000c 0009(000800e0:P)
+                                          0010(000803a9:P)
+                 _SENS_DATA
+                                 0009000d 0009(000800e6:P)
+                                          0009(0008028b:P)
+                                          0010(000803bb:P)
+                                          0010(000803dd:P)
+     SECTION=R
+                 _counter
+                                 00090442 0010(00080346:P)
+                                          0012(0008058c:P)
+                 _MOTOR_STATE
+                                 00090444 0009(000800da:P)
+                                          0011(00080406:P)
+                                          0012(00080517:P)
+                 _AGV_STATE
+                                 00090445 0009(000800ec:P)
+                                          0009(00080313:P)
+                                          0011(00080400:P)
+                                          0012(0008052b:P)
+                                          0012(0008057f:P)
+     SECTION=D
+0013 sbrk
+     SECTION=P
+                 _sbrk
+                                 000805d2
+     SECTION=D
+     SECTION=B
+     SECTION=R
+0014 startup
+     SECTION=P
+                 _PowerON_Reset
+                                 00080604 0015(000fe030:DVectTable)
+                                          0015(000fe034:DVectTable)
+                                          0015(000fe038:DVectTable)
+                                          0015(000fe03c:DVectTable)
+                                          0015(000fe040:DVectTable)
+                                          0015(000fe044:DVectTable)
+                                          0015(000fe048:DVectTable)
+                                          0015(000fe04c:DVectTable)
+                                          0015(000fe050:DVectTable)
+                                          0015(000fe054:DVectTable)
+                                          0015(000fe058:DVectTable)
+                                          0015(000fe05c:DVectTable)
+                                          0015(000fe060:DVectTable)
+                                          0015(000fe064:DVectTable)
+                                          0015(000fe068:DVectTable)
+                                          0015(000fe06c:DVectTable)
+                                          0015(000fe070:DVectTable)
+                                          0015(000fe074:DVectTable)
+                                          0015(000fe078:DVectTable)
+                                          0015(000fe07c:DVectTable)
+                                          0015(000fe080:DVectTable)
+                                          0015(000fe084:DVectTable)
+                                          0015(000fe088:DVectTable)
+                                          0015(000fe08c:DVectTable)
+                                          0015(000fe090:DVectTable)
+                                          0015(000fe094:DVectTable)
+                                          0015(000fe098:DVectTable)
+                                          0015(000fe09c:DVectTable)
+                                          0015(000fe0a4:DVectTable)
+                                          0015(000fe0a8:DVectTable)
+                                          0015(000fe0ac:DVectTable)
+                                          0015(000fe0b4:DVectTable)
+                                          0015(000fe0b8:DVectTable)
+                                          0015(000fe0bc:DVectTable)
+                                          0015(000fe0c4:DVectTable)
+                                          0015(000fe0c8:DVectTable)
+                                          0015(000fe0cc:DVectTable)
+                                          0015(000fe0d0:DVectTable)
+                                          0015(000fe0d4:DVectTable)
+                                          0015(000fe0d8:DVectTable)
+                                          0015(000fe0dc:DVectTable)
+                                          0015(000fe0e0:DVectTable)
+                                          0015(000fe0e4:DVectTable)
+                                          0015(000fe0e8:DVectTable)
+                                          0015(000fe0ec:DVectTable)
+                                          0015(000fe0f0:DVectTable)
+                                          0015(000fe0f4:DVectTable)
+                                          0015(000fe0f8:DVectTable)
+                                          0015(000fe0fc:DVectTable)
+                                          0015(000fe100:DVectTable)
+                                          0015(000fe104:DVectTable)
+                                          0015(000fe108:DVectTable)
+                                          0015(000fe10c:DVectTable)
+                                          0015(000fe110:DVectTable)
+                                          0015(000fe114:DVectTable)
+                                          0015(000fe118:DVectTable)
+                                          0015(000fe11c:DVectTable)
+                                          0015(000fe120:DVectTable)
+     SECTION=S
+0015 VectTable
+     SECTION=DVectTable
+                 _IntVect
+                                 000fe030
+0016 mvn3
+     SECTION=P
+                 $MVN$3
+                                 00080612 0006(00080069:P)
+                                          0009(00080285:P)
+0017 spregld3
+     SECTION=P
+                 $sp_regld$3
+                                 00080692 0010(000803ed:P)
+                                          0011(0008050d:P)
+0018 spregsv3
+     SECTION=P
+                 $sp_regsv$3
+                                 000806b4 0006(00080057:P)
+                                          0009(000800d5:P)
+                                          0009(00080269:P)
+                                          0010(00080327:P)
+                                          0011(000803f3:P)
+                                          0012(00080587:P)
+                                          0013(000805d3:P)
+0019 sprgld23
+     SECTION=P
+                 $spregld2$3
+                                 000806d6 0006(000800a1:P)
+                                          0009(00080265:P)
+                                          0009(000802d9:P)
+                                          0012(000805cf:P)
+                                          0013(00080601:P)
+0020 _initsct
+     SECTION=P
+                 __INITSCT
+                                 000806ec 0014(0008060b:P)
+     SECTION=C$BSEC
+     SECTION=C$DSEC

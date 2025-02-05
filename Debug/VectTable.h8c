@@ -1,9 +1,9 @@
 -cpu=300HA:20
--object="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\VectTable.obj"
+-object="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\VectTable.obj"
 -debug
--list="C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\VectTable.lst"
+-list="C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\VectTable.lst"
 -show=tab=4
 -chgincpath
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\VectTable.c"
+"C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\VectTable.c"
 -lang=c
 -nologo

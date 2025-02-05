@@ -1,99 +1,68 @@
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 18:16:12 PAGE   1
 
 ************ SOURCE LISTING ************
 
       Line Pi 0----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8----+----9----+----0----+----1----+--
-FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c
-         1     /****************************************************************************************************************/
-         2     /*  FILE        : itask_input.c                                                                                 */
-         3     /*  DATE        :Tue, Jan 17, 2012                                                                              */
-         4     /*  DESCRIPTION :AGVの入力割り込みタスク                                                                        */
-         5     /*  CPU TYPE    :H8/3052F                                                                                       */
-         6     /****************************************************************************************************************/
-         7     #include    "machine.h"                             /* 組込み関数の定義                                         */
-         8     #include    "reg3052.h"                             /* H8/3052Fの内蔵モジュール定義                             */
-         9     #include    "agvdef.h"                              /* 無人搬送車のデバイス定義                                 */
-        10     #include    "agvvars.h"                             /* 無人搬送車の共通変数を定義                               */
-        11     #include    "def_monitor_printf.h"
-        12     
-        13     /****************************************************************************************************************/
-        14     /*  入力タスク itask_input                                                                                      */
-        15     /****************************************************************************************************************/
-        16     /*???????v???O???????????v???O??????}??????*/
-        17     /****************************************************************************************************************/
-        18     /*  FILE        : itask_input.c                                                                                 */
-        19     /*  DATE        :Tue, Jan 17, 2012                                                                              */
-        20     /*  DESCRIPTION :AGV??????????^?X?N                                                                      */
-        21     /*  CPU TYPE    :H8/3052F                                                                                       */
-        22     /****************************************************************************************************************/
-        23     #include    "machine.h"                             /* ?g?????????`                                         */
-        24     #include    "reg3052.h"                             /* H8/3052F????????W???[????`                               */
-        25     #include    "agvdef.h"                              /* ???l???????f?o?C?X??`                                 */
-        26     #include    "agvvars.h"                             /* ???l???????????????`                                */
-        27     #include    "def_monitor_printf.h"
-        28     
-        29     /****************************************************************************************************************/
-        30     /*  ????^?X?N itask_input                                                                                       */
-        31     /****************************************************************************************************************/
-        32     /*あなたのプログラムを以下にプログラムを挿入する*/
-        33     /****************************************************************************************************************/
-        34     /*  FILE        : itask_input.c                                                                                 */
-        35     /*  DATE        :Tue, Jan 17, 2012                                                                              */
-        36     /*  DESCRIPTION :AGVの入力割り込みタスク                                                                      */
-        37     /*  CPU TYPE    :H8/3052F                                                                                       */
-        38     /****************************************************************************************************************/
-        39     #include    "machine.h"                             /* 組込み関数の定義                                         */
-        40     #include    "reg3052.h"                             /* H8/3052Fの内蔵モジュール定義                               */
-        41     #include    "agvdef.h"                              /* 無人搬送車のデバイス定義                                 */
-        42     #include    "agvvars.h"                             /* 無人搬送車の共通変数を定義                                */
-        43     #include    "def_monitor_printf.h"
-        44     
-        45     /****************************************************************************************************************/
-        46     /*  入力タスク itask_input                                                                                       */
-        47     /****************************************************************************************************************/
-        48     
-        49     #pragma interrupt itask_input
-        50     void itask_input(void)
-        51     {
-        52         static unsigned char sw_data0,sw_data1,sw_data2;
-        53         static int i=0,j=0;
-        54         TSR3&=~0x01;
-        55         and_ccr(~0x80);
-        56         counter++;
-        57         
-        58         if(i==0){
-        59             sw_data0=bios_sw_input(); //iが0の時、スイッチの値をsw_data0に代入
-        60         }
-        61         else if(i==1){
-        62             sw_data1=bios_sw_input(); //iが１の時、スイッチの値をsw_data1に代入
-        63         }
-        64         else{
-        65             sw_data2=bios_sw_input(); //iが２の時、スイッチの値をsw_data2に代入
-        66         }
-        67         i++;
-        68         if(i==3){//iが３になったら０になるようにする
-        69             i=0;
-        70         }
-        71         
-        72         if((sw_data0==sw_data1)&&(sw_data1==sw_data2)){//過去３回のスイッチの値が一致した場合にSW_DATAにスイッチの値を代入
-        73             SW_DATA=bios_sw_input();
-        74         }
-        75         
-        76         if(0x00!=bios_sensor_input()){
-        77             SENS_DATA=bios_sensor_input(); 
-        78             j=0;
-        79         }
-        80         else if(0==bios_sensor_input()){
-        81             j++;
-        82         }
-        83         if(j==10){
-        84             SENS_DATA=0;
-        85             j=0;
-        86         }
-        87     }
+FILE NAME: C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\itask_input.c
+         1     /*あなたのプログラムを以下にプログラムを挿入する*/
+         2     /****************************************************************************************************************/
+         3     /*  FILE        : itask_input.c                                                                                 */
+         4     /*  DATE        :Tue, Jan 17, 2012                                                                              */
+         5     /*  DESCRIPTION :AGVの入力割り込みタスク                                                                      */
+         6     /*  CPU TYPE    :H8/3052F                                                                                       */
+         7     /****************************************************************************************************************/
+         8     #include    "machine.h"                             /* 組込み関数の定義                                         */
+         9     #include    "reg3052.h"                             /* H8/3052Fの内蔵モジュール定義                               */
+        10     #include    "agvdef.h"                              /* 無人搬送車のデバイス定義                                 */
+        11     #include    "agvvars.h"                             /* 無人搬送車の共通変数を定義                                */
+        12     #include    "def_monitor_printf.h"
+        13     
+        14     /****************************************************************************************************************/
+        15     /*  入力タスク itask_input                                                                                       */
+        16     /****************************************************************************************************************/
+        17     
+        18     #pragma interrupt itask_input
+        19     void itask_input(void)
+        20     {
+        21         static unsigned char sw_data0,sw_data1,sw_data2;
+        22         static int i=0,j=0;
+        23         TSR3&=~0x01;
+        24         and_ccr(~0x80);
+        25         counter++;
+        26         
+        27         if(i==0){
+        28             sw_data0=bios_sw_input(); //iが0の時、スイッチの値をsw_data0に代入
+        29         }
+        30         else if(i==1){
+        31             sw_data1=bios_sw_input(); //iが１の時、スイッチの値をsw_data1に代入
+        32         }
+        33         else{
+        34             sw_data2=bios_sw_input(); //iが２の時、スイッチの値をsw_data2に代入
+        35         }
+        36         i++;
+        37         if(i==3){//iが３になったら０になるようにする
+        38             i=0;
+        39         }
+        40         
+        41         if((sw_data0==sw_data1)&&(sw_data1==sw_data2)){//過去３回のスイッチの値が一致した場合にSW_DATAにスイッチの値を代入
+        42             SW_DATA=bios_sw_input();
+        43         }
+        44         
+        45         if(0x00!=bios_sensor_input()){
+        46             SENS_DATA=bios_sensor_input(); 
+        47             j=0;
+        48         }
+        49         else if(0==bios_sensor_input()){
+        50             j++;
+        51         }
+        52         if(j==100){
+        53             SENS_DATA=0;
+        54             j=0;
+        55         }
+        56     }
 
 
-H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 16:18:04 PAGE   1
+H8S,H8/300 SERIES C/C++ COMPILER (V.6.02.01.000)    5-Feb-2025 18:16:12 PAGE   1
 
 ******* SECTION SIZE INFORMATION *******
 
@@ -121,5 +90,5 @@ NUMBER OF INTERNAL/EXTERNAL SYMBOLS:         22
 
 **** COMPILE CONDITION INFORMATION ****
 
-COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_input.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug\itask_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c -lang=c -nologo
+COMMAND LINE: -cpu=300HA:20 -object=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.obj -debug -list=C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\Debug\itask_input.lst -show=tab=4 -chgincpath C:\Users\s4exp\Desktop\R7a_team5\test_merge_v2\Soft2\itask_input.c -lang=c -nologo
 CPU         : 300ha:20

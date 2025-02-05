@@ -24,7 +24,9 @@ void handle_control(unsigned char spos);
 //変数の定義
 unsigned char calculated_pos;
 int i;
-
+//int counter_state = 0;
+unsigned char frag_state;
+unsigned char frag_motor_state;
 #pragma interrupt itask_control
 void    itask_control(void)
 {
@@ -36,7 +38,7 @@ void    itask_control(void)
     // ③ハンドル制御(handle_control())
     //以上3つをitask_controlが割り込まれた際に実行する。
 	agv_state();
-	calculated_pos = cal_sensorposition();
+	calculated_pos = cal_sensor_position();
 	handle_control(calculated_pos);
 	
 	//ITU2の割り込みフラグをクリア
@@ -49,7 +51,9 @@ void    itask_control(void)
 /****************************************************************************************************************/
 void agv_state(void)
 {
-    //センサ検出とはSENS_DATAが0x00の値以外であること
+	frag_state = AGV_STATE;
+	frag_motor_state = MOTOR_STATE;
+	//センサ検出とはSENS_DATAが0x00の値以外であること
     switch (AGV_STATE) {
     case AGV_BOOT:
         if (SENS_DATA == 0x00 || SW_DATA == 0x01) {
@@ -79,6 +83,7 @@ void agv_state(void)
         }
         if (SW_DATA == 0x01) {
             AGV_STATE = AGV_RUN_WAIT;
+			GRA1 = 999;
             TSTR |= 0x02; 
         }
         break;
@@ -137,6 +142,12 @@ void agv_state(void)
         break;
 
     }
+	if ((frag_state != AGV_STATE) || (frag_motor_state != MOTOR_STATE)){
+		printf("AGV_STATE:%d , ", AGV_STATE);
+		printf("MOTOR_STATE:%d\n" , MOTOR_STATE);
+		
+		}
+	
 }       
 
 /****************************************************************************************************************/
@@ -150,7 +161,7 @@ unsigned char cal_sensor_position(void)
     // weight(i)=16+32*iの計算式に則り、重みを設定
     unsigned char weight[8] = {16, 48, 80, 112, 144, 176, 208, 240};
     // センサ入力を取得
-    unsigned char sens_input = bios_sensor_input();
+    unsigned char sens_input = SENS_DATA;
     // 必要な変数を定義
     unsigned int molecule = 0;
     unsigned int denominator = 0;
@@ -170,7 +181,7 @@ unsigned char cal_sensor_position(void)
     //  positionを算出
 	if(denominator == 0){return 0;}
     position =(unsigned char)( molecule / denominator);
-	printf("postion = %d\n",position);
+	//printf("postion = %d\n",position);
     // positionを返す
     return position;
     
@@ -192,14 +203,20 @@ void handle_control(unsigned char spos)
     int da_output = 0;
 
     // dに17/32を乗じたものを現在のハンドル切れ角adに加えたものが制御値に求められる。
-    
 	da_output = diff * 17 / 32;
 	da_output = da_output + (int)(ad);
 	
+	//unsgined charがたに収めるため、範囲を制限
     if (da_output < 0){da_output = 0;}
 	if (da_output > 255){da_output = 255;}
 	
-    // 制御値を出力
-	bios_led_output(ad);
-    bios_da_output(da_output);
+    
+	//走行状態の時のみ出力
+	if (AGV_STATE == AGV_RUN){
+		
+		//制御値を出力
+		bios_da_output(da_output);
+	}
+	
+    
 }

@@ -14,9 +14,6 @@
 /*    走行モータ制御タスク itask_motor                                                                            */
 /****************************************************************************************************************/
 /***********************************************************************************************/
-
-
-#pragma    interrupt itask_motor
 /*
 この関数では, 
 1. モータの回転状態を変化する.
@@ -24,11 +21,16 @@
 3. モータの状態をもとに, 加速テーブルとGRA1を用いた, 割り込みするタイミングを変化する.  
    つまり, itask_motorが呼び出されるタイミングを変化することでモータの回転はじめを変える. 
 */
+unsigned char frag_state_motor;
+unsigned char frag_motor_state_motor;
+
+#pragma interrupt itask_motor
 void itask_motor(void)
 {
 
     int static pointer = 0;
-
+	frag_state_motor = AGV_STATE;
+	frag_motor_state_motor = MOTOR_STATE;
     /*
     このタスクが起動されたときに、MOTOR_STATEが「MOTOR_STOP以外の条件」ではモータの励磁出力を順番に出力する
     つまり, モータを回転する
@@ -36,7 +38,7 @@ void itask_motor(void)
     if (MOTOR_STATE != MOTOR_STOP) {
         //return MOTOR_STATE;
         bios_step_output();
-        printf("モータの状態は%u", MOTOR_STATE);
+        //printf("モータの状態は%u", MOTOR_STATE);
     }
     else {
         MOTOR_STATE = MOTOR_STOP;
@@ -57,6 +59,7 @@ void itask_motor(void)
         加速テーブルのポインタを現在の状態からインクリメントする
         つまり, 割り込み周期が変わっている. つまり, itask_motorの呼び出す周期が変わる. 
         */
+		
         pointer++;
         GRA1 = ACC_TABLE[pointer]; 
 
@@ -71,7 +74,7 @@ void itask_motor(void)
         break;
     }
 
-    /*モータが低速状態の時*/
+    /*モータが定速状態の時*/
     case MOTOR_CONST: {
         /*定速中にAGV_STOP_WAITあるいはAGV_RUN_ALMになれば減速状態になる*/
         if ((AGV_STATE == AGV_STOP_WAIT) || (AGV_STATE == AGV_RUN_ALM)) {
@@ -80,17 +83,22 @@ void itask_motor(void)
         break;
     }
 
-    /*モータが停止状態の時*/
+    /*モータが減速状態の時*/
     case MOTOR_BREAK: {
         //itask_motorの呼び出す速度を遅くする. 
         pointer--; /*ポインタの値をデクリメント*/
         GRA1 = ACC_TABLE[pointer]; /*GRA1にテーブルの値をセット*/
-        /*テーブルの値が0になるとMOTOR_STATEを停止状態にする*/
-        if (pointer == 0) {
+        /*GRA1の値が999になるとMOTOR_STATEを停止状態にする*/
+        if (GRA1 == 999) {
             MOTOR_STATE = MOTOR_STOP;
             /*ITUの動作を停止する*/
-            TCNT1 = 0;
+            TSTR &= ~0x02; 
         }
+		//減速状態のまま走行状態に移行すると加速する
+		if(AGV_STATE == AGV_RUN){
+			MOTOR_STATE = MOTOR_ACC;
+			}
+		
         break;
     }
 
@@ -98,7 +106,18 @@ void itask_motor(void)
         break;
     }
     //printf("モータの状態は%u", MOTOR_STATE); //テスト用
+	
+	//テスト用
+	
+		if ((frag_state_motor != AGV_STATE) || (frag_motor_state_motor != MOTOR_STATE)){
+		printf("AGV_STATE:%d , ", AGV_STATE);
+		printf("MOTOR_STATE:%d\n" , MOTOR_STATE);
+		
+		}
+	
+	
+	
+	
 	//ITU1の割り込みフラグをクリア
 	TSR1 &= ~0x01;
 }
-
