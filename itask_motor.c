@@ -95,9 +95,19 @@ void itask_motor(void)
             TSTR &= ~0x02; 
         }
 		//å∏ë¨èÛë‘ÇÃÇ‹Ç‹ëñçsèÛë‘Ç…à⁄çsÇ∑ÇÈÇ∆â¡ë¨Ç∑ÇÈ
-		if(AGV_STATE == AGV_RUN){
-			MOTOR_STATE = MOTOR_ACC;
-			}
+		//Ç‡Çµåªç›ÇÃë¨ìxGRA1Ç™51ÇÊÇËâ∫ÇæÇ¡ÇΩÇÁâ¡ë¨
+		//pointerÇ™200à»â∫ÇÃèåèÇí«â¡
+		//if((AGV_STATE == AGV_RUN) && (GRA1 < 51)){
+		//	MOTOR_STATE = MOTOR_ACC;
+		//	}
+		//if ((AGV_STATE == AGV_RUN) && (from_run_alm == 1) && (GRA1 > 100)){
+		//		MOTOR_STATE = MOTOR_ACC;
+		//		from_run_alm = 0;
+		//		}
+		
+		//else if((AGV_STATE == AGV_RUN) && (from_run_alm == 1)){
+		//		from_run_alm = 0;
+		//		}
 		
         break;
     }
@@ -112,7 +122,6 @@ void itask_motor(void)
 		if ((frag_state_motor != AGV_STATE) || (frag_motor_state_motor != MOTOR_STATE)){
 		printf("AGV_STATE:%d , ", AGV_STATE);
 		printf("MOTOR_STATE:%d\n" , MOTOR_STATE);
-		
 		}
 	
 	

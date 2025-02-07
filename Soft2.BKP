@@ -3,14 +3,14 @@
 [DATABASE_VERSION]
 "2.8" 
 [PROJECT_DETAILS]
-"Soft2" "C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2" "C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Soft2.hwp" "H8S,H8/300" "Hitachi H8S,H8/300 Standard" "Application" "300H" "H8/3052F" 
+"Soft2" "C:\Users\s4exp\Desktop\team5\debug_run\Soft2" "C:\Users\s4exp\Desktop\team5\debug_run\Soft2\Soft2.hwp" "H8S,H8/300" "Hitachi H8S,H8/300 Standard" "Application" "300H" "H8/3052F" 
 [INFORMATION]
 "プロジェクト情報がありません" 
 [TOOL_CHAIN]
 "Hitachi H8S,H8/300 Standard Toolchain" "6.2.1.0" 
 [CONFIGURATIONS]
-"Debug" "C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Debug" 
-"Release" "C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Release" 
+"Debug" "C:\Users\s4exp\Desktop\team5\debug_run\Soft2\Debug" 
+"Release" "C:\Users\s4exp\Desktop\team5\debug_run\Soft2\Release" 
 [BUILD_PHASES]
 "Hitachi H8S,H8/300 Assembler" 1 
 "Hitachi H8S,H8/300 C/C++ Compiler" 1 
@@ -117,25 +117,25 @@
 "Object file" "Hitachi OptLinker" "Hitachi H8S,H8/300 Assembler" 
 "Object file" "Hitachi OptLinker" "Hitachi H8S,H8/300 C/C++ Compiler" 
 [PROJECT_FILES]
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\Acc_Table.h" "User" "C header file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\VectTable.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\agvvars.h" "User" "C header file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_ad_input.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_beep_output.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_da_output.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_led_output.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_sensor_input..c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_step_output.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_sw_input.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\dbsct.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\def_monitor_printf.h" "User" "C header file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_control.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_motor.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\main.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\sbrk.c" "User" "C source file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\stacksct.h" "User" "C header file" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\startup.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\Acc_Table.h" "User" "C header file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\VectTable.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\agvvars.h" "User" "C header file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_ad_input.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_beep_output.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_da_output.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_led_output.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_sensor_input..c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_step_output.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_sw_input.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\dbsct.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\def_monitor_printf.h" "User" "C header file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_control.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_input.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_motor.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\main.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\sbrk.c" "User" "C source file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\stacksct.h" "User" "C header file" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\startup.c" "User" "C source file" 2 
 [FOLDER]
 "C header file" "C header file" 
 "C source file" "C source file" 
@@ -144,7 +144,7 @@
 [ON_DEMAND_COMPONENTS_LOADED]
 [SYNC_SESSION_NAMES]
 [SESSIONS]
-"DefaultSession" "C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\DefaultSession.hsf" 0 
+"DefaultSession" "C:\Users\s4exp\Desktop\team5\debug_run\Soft2\DefaultSession.hsf" 0 
 [GENERAL_DATA_SESSION_DefaultSession]
 [OPTIONS_Debug_Hitachi H8S,H8/300 Assembler]
 "Assembly source file" "0d66091c97f3bc10" 4 
@@ -152,21 +152,21 @@
 [OPTIONS_Debug_Hitachi H8S,H8/300 C/C++ Compiler]
 "C source file" "07bd73bc2208bc10" 2 
 "C++ source file" "07bd73bc2208bc10" 3 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\VectTable.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_ad_input.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_beep_output.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_da_output.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_led_output.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_sensor_input..c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_step_output.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_sw_input.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\dbsct.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_control.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_motor.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\main.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\sbrk.c" "07bd73bc2208bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\startup.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\VectTable.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_ad_input.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_beep_output.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_da_output.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_led_output.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_sensor_input..c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_step_output.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_sw_input.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\dbsct.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_control.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_input.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_motor.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\main.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\sbrk.c" "07bd73bc2208bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\startup.c" "07bd73bc2208bc10" 2 
 [OPTIONS_Debug_Hitachi H8S,H8/300 C/C++ Library Generator]
 "Single Shot" "0d66091c97f3bc10" 1 
 [OPTIONS_Debug_Hitachi OptLinker]
@@ -190,21 +190,21 @@
 [OPTIONS_Release_Hitachi H8S,H8/300 C/C++ Compiler]
 "C source file" "0d66091c97f3bc10" 2 
 "C++ source file" "0d66091c97f3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\VectTable.c" "0b49e945a7f3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_ad_input.c" "08584da21cf3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_beep_output.c" "0346e8ea0804bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_da_output.c" "0dd6c4bfdbf3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_led_output.c" "03f0c1c5ebf3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_sensor_input..c" "0a7465d4dbf3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_step_output.c" "03e6b39a5604bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\bios_sw_input.c" "0023c184cbf3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\dbsct.c" "0d66091c97f3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_control.c" "0721ad122404bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_input.c" "03bfb8594cf3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\itask_motor.c" "0da7233d0604bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\main.c" "0d6bb0b4a7f3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\sbrk.c" "0d66091c97f3bc10" 2 
-"C:\Users\s4exp\Desktop\R7a_team5\test_merge\Soft2\startup.c" "00c73ac7a7f3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\VectTable.c" "0b49e945a7f3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_ad_input.c" "08584da21cf3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_beep_output.c" "0346e8ea0804bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_da_output.c" "0dd6c4bfdbf3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_led_output.c" "03f0c1c5ebf3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_sensor_input..c" "0a7465d4dbf3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_step_output.c" "03e6b39a5604bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\bios_sw_input.c" "0023c184cbf3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\dbsct.c" "0d66091c97f3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_control.c" "0721ad122404bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_input.c" "03bfb8594cf3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\itask_motor.c" "0da7233d0604bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\main.c" "0d6bb0b4a7f3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\sbrk.c" "0d66091c97f3bc10" 2 
+"C:\Users\s4exp\Desktop\team5\debug_run\Soft2\startup.c" "00c73ac7a7f3bc10" 2 
 [OPTIONS_Release_Hitachi H8S,H8/300 C/C++ Library Generator]
 "Single Shot" "0d66091c97f3bc10" 1 
 [OPTIONS_Release_Hitachi OptLinker]

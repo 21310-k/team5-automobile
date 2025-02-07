@@ -131,6 +131,7 @@ void agv_state(void)
         }
         if (SENS_DATA != 0x00 && SW_DATA == 0x01 && MOTOR_STATE != MOTOR_STOP) {
             AGV_STATE = AGV_RUN;
+			from_run_alm = 1;
         }
         if (SENS_DATA != 0x00 && SW_DATA == 0x01 && MOTOR_STATE == MOTOR_STOP) {
             AGV_STATE = AGV_READY;
